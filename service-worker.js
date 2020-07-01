@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.1b4a9735c7fb7950ced445a040524437.js"
+  "/finplan/precache-manifest.21f66cdbd543b0d7cde7cd2eccec24e0.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "finplan"});
