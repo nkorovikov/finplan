@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/finplan/img/splashes/apple_splash_750.png"
   },
   {
-    "revision": "cf24bb449d5a5477fd8a6d2f05f2b9aa",
+    "revision": "cedd4a8ce5c972dc61769547c486610a",
     "url": "/finplan/index.html"
   },
   {
