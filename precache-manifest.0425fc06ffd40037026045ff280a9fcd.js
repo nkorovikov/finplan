@@ -4,7 +4,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/finplan/css/app.b92f8377.css"
   },
   {
-    "revision": "e6d102eef372db71f336bd2b07bef17a",
+    "revision": "be585b7964de5e00d25e191d254b00f0",
+    "url": "/finplan/img/splashes/apple_splash_750.png"
+  },
+  {
+    "revision": "fece376d0634a2cbd71483e17fc59296",
     "url": "/finplan/index.html"
   },
   {
@@ -26,5 +30,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/finplan/robots.txt"
+  },
+  {
+    "revision": "28bd4d8569c154c40efbaef521d37699",
+    "url": "/finplan/site.webmanifest"
   }
 ]);
