@@ -4,7 +4,9 @@
     <section class="content">
       <slot></slot>
     </section>
-    <footer></footer>
+    <footer>
+      <a @click.prevent="refreshPage">Update app</a>
+    </footer>
   </main>
 </template>
 
@@ -17,9 +19,13 @@ import NavBar from "@/components/navbar/NavBar.vue";
     NavBar
   }
 })
-export default class PublicLayout extends Vue {}
+export default class PublicLayout extends Vue {
+  public refreshPage(): void {
+    window.location.reload(true);
+  }
+}
 </script>
 
-<style lang="sass" scoped>
-@import "./public-layout.scss"
+<style lang="scss" scoped>
+@import "./public-layout.scss";
 </style>
