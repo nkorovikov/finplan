@@ -3,47 +3,52 @@
     <div>
       <input type="number" v-model.number="sum" />
       <input v-model.trim="category" />
-      <button @click.prevent="saveExpence">Save</button>
+      <button @click.prevent="saveExpenseHandler">Save</button>
     </div>
     <div>
       <table class="table">
         <thead>
           <tr>
-            <th class="">Date</th>
-            <th class="">Category</th>
-            <th class="">Sum</th>
+            <th class>Date</th>
+            <th class>Category</th>
+            <th class>Sum</th>
           </tr>
         </thead>
 
         <tbody class="overflow-scroll">
-          <tr v-for="(expence, index) in sortedExpences" :key="index">
-            <td
-              class=""
-            >{{ new Date(expence.date).toLocaleString('ru-RU', dateFormatOptions) }}</td>
-            <td class="">{{ expence.category }}</td>
-            <td class="">{{ expence.sum }}</td>
-            <td class=""><button @click.prevent="remove(index)">x</button></td>
+          <tr v-for="(expence, index) in sortedByCreatedAt" :key="index">
+            <td class>{{ new Date(expence.createdAt).toLocaleString('ru-RU', dateFormatOptions) }}</td>
+            <td class>{{ expence.category }}</td>
+            <td class>{{ expence.sum }}</td>
+            <td class>
+              <button @click.prevent="deleteHandler(expence.id)">x</button>
+            </td>
           </tr>
         </tbody>
         <tfoot>
-          <td class=""></td>
-          <td class=""></td>
-          <td class="">{{ expencesSum }}</td>
-          <td class=""></td>
+          <td class></td>
+          <td class></td>
+          <td class>{{ expencesSum }}</td>
+          <td class></td>
         </tfoot>
       </table>
     </div>
+    <button @click.prevent="refreshPage">Update</button>
+    <a href="#">Categories</a>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+import Expense from "../models/Expense";
+
+const expenses = namespace("Expenses");
 
 @Component({
   components: {}
 })
 export default class Home extends Vue {
-  private expenses: Array<any> = [];
   private sum = 0;
   private category = "";
   private dateFormatOptions: object = {
@@ -56,66 +61,51 @@ export default class Home extends Vue {
     hour12: false
   };
 
-  mounted() {
-    this.getFromLocalStorage()
-  }
+  @expenses.Getter
+  public sortedByCreatedAt!: Array<Expense>;
 
-  @Watch("expenses")
-  expensesChanged(newVal: Array<object>) {
-    this.saveToLocalStorage();
-  }
+  @expenses.Getter
+  public sortedById!: Array<Expense>;
 
-  get sortedExpences(): Array<object> {
-    return this.expenses.sort((a: any, b: any): number => {
-      if (a.date === b.date) {
-        return 0;
-      }
+  @expenses.Action
+  saveExpense!: (expense: Expense) => void;
 
-      if (a.date > b.date) {
-        return -1;
-      }
-
-      return 1;
-    });
-  }
+  @expenses.Action
+  deleteExpense!: (id: number) => void;
 
   get expencesSum(): number {
     let sum = 0;
-    this.expenses.forEach((expence: any) => {
-      sum = sum + expence.sum;
+    this.sortedByCreatedAt.forEach((expence: Expense) => {
+      sum = sum + expence.getSum();
     });
 
     return sum;
   }
 
-  public saveExpence(): void {
-    this.expenses.push({
-      sum: this.sum,
-      category: this.category,
-      date: new Date().getTime()
-    });
+  public saveExpenseHandler(): void {
+    // @TODO validation
+
+    const lastId: number = this.sortedById.length
+      ? this.sortedById[this.sortedById.length - 1].getId()
+      : 0;
+
+    this.saveExpense(
+      new Expense(lastId + 1, this.sum, this.category, new Date().getTime())
+    );
 
     this.sum = 0;
     this.category = "";
   }
 
-  public remove(index: number): void {
-    this.expenses.splice(index, 1);
+  public deleteHandler(id: number): void {
+    this.deleteExpense(id);
   }
 
-  public saveToLocalStorage(): void {
-    localStorage.setItem("expenses", JSON.stringify(this.expenses));
-  }
-
-  public getFromLocalStorage(): void {
-    if (!localStorage.expenses) {
-      return;
-    }
-    this.expenses = JSON.parse(localStorage.expenses);
+  public refreshPage(): void {
+    window.location.reload(true);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
