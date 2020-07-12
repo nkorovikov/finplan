@@ -14,6 +14,22 @@ const routes: Array<RouteConfig> = [
     name: 'History',
     component: () => import('../views/History.vue')
   },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: () => import('../views/Categories.vue')
+  },
+  {
+    path: '/categories/create',
+    name: 'CategoriesCreate',
+    component: () => import('../views/CategoriesCreate.vue')
+  },
+  {
+    path: '/categories/:id/update',
+    name: 'CategoriesUpdate',
+    component: () => import('../views/CategoriesUpdate.vue'),
+    props: true
+  },
 ];
 
 const router = new VueRouter({

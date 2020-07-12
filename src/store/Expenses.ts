@@ -6,7 +6,7 @@ const storage: LocalStorage = new LocalStorage()
 
 @Module({ namespaced: true })
 export default class Expenses extends VuexModule {
-    public expenses: Array<Expense> = storage.getData()
+    public expenses: Array<Expense> = storage.getExpenses()
 
     get sortedByCreatedAt(): Array<Expense> {
         return [...this.expenses].sort((a: Expense, b: Expense): number => {
@@ -50,12 +50,12 @@ export default class Expenses extends VuexModule {
     @Action
     public saveExpense(expense: Expense): void {
         this.context.commit('push', expense)
-        storage.syncData(this.expenses)
+        storage.syncExpenses(this.expenses)
     }
 
     @Action
     public deleteExpense(id: number): void {
         this.context.commit('delete', id)
-        storage.syncData(this.expenses)
+        storage.syncExpenses(this.expenses)
     }
 }

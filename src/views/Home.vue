@@ -5,6 +5,7 @@
       <router-link :to="{ name: 'History'}" tag="i" class="material-icons">donut_small</router-link>
     </div>
     <div>
+      <router-link :to="{ name: 'Categories'}" tag="i" class="material-icons">view_list</router-link>
       <input v-model.trim="category" />
       <button @click.prevent="saveExpenseHandler">Save</button>
     </div>
