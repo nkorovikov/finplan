@@ -1,35 +1,32 @@
 <template>
-  <div>
-      <router-link :to="{name: 'Home'}" tag="button">
-          <i class="material-icons">arrow_back</i>
-          Back
-      </router-link>
-    <table class="table">
-      <thead>
-        <tr>
-          <th class>Date</th>
-          <th class>Category</th>
-          <th class>Sum</th>
-        </tr>
-      </thead>
-
-      <tbody class="overflow-scroll">
-        <tr v-for="(expence, index) in sortedByCreatedAt" :key="index">
-          <td class>{{ new Date(expence.createdAt).toLocaleString('ru-RU', dateFormatOptions) }}</td>
-          <td class>{{ expence.category }}</td>
-          <td class>{{ expence.sum }}</td>
-          <td class>
-            <button @click.prevent="deleteHandler(expence.id)">x</button>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <td class></td>
-        <td class></td>
-        <td class>{{ expencesSum }}</td>
-        <td class></td>
-      </tfoot>
-    </table>
+  <div class="container">
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Date</th>
+            <th class="text-left">Category</th>
+            <th class="text-right text-no-wrap">Sum</th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(expence, index) in sortedByCreatedAt" :key="index">
+            <td
+              class="text-left"
+            >{{ new Date(expence.createdAt).toLocaleString('ru-RU', dateFormatOptions) }}</td>
+            <td class="text-left">{{ sortedById.find(c => expence.categoryId === c.id).name }}</td>
+            <td class="text-right text-no-wrap">
+              {{sortedById.find(c => expence.categoryId === c.id).type === 1 ? '+' : '-'}}
+              {{ expence.sum }}
+            </td>
+            <td class="text-right">
+              <i @click.prevent="deleteHandler(expence.id)" class="material-icons">delete</i>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </div>
 </template>
 
@@ -37,8 +34,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
+import Category from "../models/Category";
 
 const expenses = namespace("Expenses");
+const categories = namespace("Categories");
 
 @Component({
   components: {}
@@ -56,6 +55,9 @@ export default class History extends Vue {
 
   @expenses.Getter
   public sortedByCreatedAt!: Array<Expense>;
+
+  @categories.Getter
+  public sortedById!: Array<Category>;
 
   @expenses.Action
   deleteExpense!: (id: number) => void;

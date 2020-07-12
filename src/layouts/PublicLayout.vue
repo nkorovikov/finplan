@@ -4,9 +4,27 @@
     <section class="content">
       <slot></slot>
     </section>
-    <footer>
-      <a @click.prevent="refreshPage">Update app</a>
-    </footer>
+    <v-bottom-navigation absolute>
+      <v-btn :to="{ name: 'History'}">
+        <span>History</span>
+        <v-icon>mdi-history</v-icon>
+      </v-btn>
+
+      <v-btn exact :to="{ name: 'Home'}">
+        <span>Home</span>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn :to="{ name: 'Categories'}">
+        <span>Categories</span>
+        <v-icon>mdi-table-of-contents</v-icon>
+      </v-btn>
+
+      <v-btn :to="{ name: 'Settings'}">
+        <span>Setings</span>
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </main>
 </template>
 
@@ -19,13 +37,5 @@ import NavBar from "@/components/navbar/NavBar.vue";
     NavBar
   }
 })
-export default class PublicLayout extends Vue {
-  public refreshPage(): void {
-    window.location.reload(true);
-  }
-}
+export default class PublicLayout extends Vue {}
 </script>
-
-<style lang="scss" scoped>
-@import "./public-layout.scss";
-</style>

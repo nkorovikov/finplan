@@ -14,4 +14,8 @@ export default class Category {
     public getId(): number {
         return this.id
     }
+
+    public getType(): number {
+        return this.type
+    }
 }

@@ -10,7 +10,7 @@ export default class LocalStorage {
             .map((expense: any) => new Expense(
                 expense.id,
                 expense.sum,
-                expense.category,
+                expense.categoryId,
                 expense.createdAt,
             ));
     }

@@ -22,7 +22,15 @@ export default class CategoriesCategories extends VuexModule {
         })
     }
 
-    
+    get incomes(): Array<Category> {
+        return [...this.categories].filter((a: Category): boolean => a.getType() === 1)
+    }
+
+    get outcomes(): Array<Category> {
+        return [...this.categories].filter((a: Category): boolean => a.getType() === 2)
+    }
+
+
 
     @Mutation
     public push(category: Category): void {
@@ -60,7 +68,7 @@ export default class CategoriesCategories extends VuexModule {
     }
 
     @Action
-    findById(id: number): Category|undefined {
+    findById(id: number): Category | undefined {
         return this.categories.find((category: Category) => category.getId() === id);
     }
 }

@@ -30,6 +30,12 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/CategoriesUpdate.vue'),
     props: true
   },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('../views/Settings.vue'),
+    props: true
+  },
 ];
 
 const router = new VueRouter({

@@ -1,13 +1,13 @@
 export default class Expense {
     private id: number;
     private sum: number
-    private category: string
+    private categoryId: number
     private createdAt: number
 
-    public constructor(id: number, sum: number, category: string, createdAt: number) {
+    public constructor(id: number, sum: number, categoryId: number, createdAt: number) {
         this.id = id
         this.sum = sum
-        this.category = category
+        this.categoryId = categoryId
         this.createdAt = createdAt
     }
 

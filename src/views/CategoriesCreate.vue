@@ -1,28 +1,17 @@
 <template>
-  <div>
-    <router-link :to="{name: 'Categories'}" tag="button">
-      <i class="material-icons">arrow_back</i>
-      Back
-    </router-link>
+  <div class="container">
+    <v-text-field label="Name" outlined v-model.trim="name" />
+    <v-select v-model.number="type" :items="types" label="Type" outlined></v-select>
+    <v-select v-model="cssClass" :items="cssClasses" label="Icon" outlined>
+      <template v-slot:item="{item}">
+        <div v-html="item.text" />
+      </template>
+      <template v-slot:selection="{item}">
+        <div v-html="item.text" />
+      </template>
+    </v-select>
     <div>
-      <div>
-        <input v-model.trim="name" />
-      </div>
-      <div>
-        <select v-model.number="type">
-          <option value="1">Income</option>
-          <option value="2">Outcome</option>
-        </select>
-      </div>
-      <div>
-        <select v-model="cssClass">
-          <option value="shopping_cart">shopping_cart</option>
-          <option value="account_balance">account_balance</option>
-        </select>
-      </div>
-      <div>
-        <button @click.prevent="saveCategoryHandler">Save</button>
-      </div>
+      <v-btn @click.prevent="saveCategoryHandler">Save</v-btn>
     </div>
   </div>
 </template>
@@ -41,6 +30,26 @@ export default class CategoriesCreate extends Vue {
   private name = "";
   private type = 1;
   private cssClass = "shopping_cart";
+  private types = [
+    {
+      text: "Income",
+      value: 1
+    },
+    {
+      text: "Outcome",
+      value: 2
+    }
+  ];
+  private cssClasses = [
+    {
+      text: "<i class='material-icons'>shopping_cart</i>",
+      value: "shopping_cart"
+    },
+    {
+      text: "<i class='material-icons'>account_balance</i>",
+      value: "account_balance"
+    }
+  ];
 
   @categories.Getter
   public sortedById!: Array<Category>;
