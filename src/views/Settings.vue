@@ -21,8 +21,11 @@ import { Component, Vue } from "vue-property-decorator";
   components: {}
 })
 export default class Settings extends Vue {
-    public reload() {
-        window.location.reload(true)
-    }
+  public reload() {
+    this.$router.push({ name: "Home" });
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 1000);
+  }
 }
 </script>

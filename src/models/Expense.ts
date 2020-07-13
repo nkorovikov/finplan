@@ -19,6 +19,10 @@ export default class Expense {
         return this.sum
     }
 
+    public getCategoryId(): number {
+        return this.categoryId
+    }
+
     public getCreatedAt(): number {
         return this.createdAt
     }

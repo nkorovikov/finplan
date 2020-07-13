@@ -30,8 +30,6 @@ export default class CategoriesCategories extends VuexModule {
         return [...this.categories].filter((a: Category): boolean => a.getType() === 2)
     }
 
-
-
     @Mutation
     public push(category: Category): void {
         this.categories.push(category)

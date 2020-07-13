@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
-    <v-btn @click.prevent="changeType" outlined>{{ types[type] }}</v-btn>
+  <div>
+    <v-btn v-if="typeSwitcherEnabled" @click.prevent="changeType" outlined>{{ types[type] }}</v-btn>
     <v-simple-table>
       <template v-slot:default>
         <tbody>
           <tr v-for="category in categories" :key="category.id">
             <td>
-              <i class="material-icons">{{ category.cssClass }}</i>
+              <i class="material-icons">{{ category.icon }}</i>
               <span style="vertical-align: super;">{{ category.name }}</span>
             </td>
             <td class="text-right">
@@ -50,6 +50,10 @@ export default class Categories extends Vue {
     2: "Outcome"
   };
 
+  mounted() {
+    this.checkLengths();
+  }
+
   @expenses.Getter
   public sortedById!: Array<Category>;
 
@@ -69,6 +73,10 @@ export default class Categories extends Vue {
     return this.outcomes;
   }
 
+  get typeSwitcherEnabled(): boolean {
+    return this.incomes.length > 0 && this.outcomes.length > 0;
+  }
+
   public changeType(): void {
     if (this.type === 1) {
       this.type = 2;
@@ -79,6 +87,17 @@ export default class Categories extends Vue {
 
   public deleteHandler(id: number): void {
     this.deleteCategory(id);
+    this.checkLengths();
+  }
+
+  private checkLengths(): void {
+    if (this.incomes.length === 0) {
+      this.type = 2;
+    }
+
+    if (this.outcomes.length === 0) {
+      this.type = 1;
+    }
   }
 }
 </script>

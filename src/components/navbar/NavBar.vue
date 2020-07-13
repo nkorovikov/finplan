@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar dark>
+  <v-app-bar dark app>
     <v-toolbar-title>Finplan</v-toolbar-title>
   </v-app-bar>
 </template>

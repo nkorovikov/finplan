@@ -1,26 +1,28 @@
 <template>
   <main>
     <nav-bar />
-    <section class="content">
-      <slot></slot>
-    </section>
-    <v-bottom-navigation absolute>
-      <v-btn :to="{ name: 'History'}">
+    <v-main>
+      <v-container fluid>
+        <slot></slot>
+      </v-container>
+    </v-main>
+    <v-bottom-navigation app ansolute grow>
+      <v-btn :to="{ name: 'History'}" height="56px">
         <span>History</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
 
-      <v-btn exact :to="{ name: 'Home'}">
+      <v-btn exact :to="{ name: 'Home'}" height="56px">
         <span>Home</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn :to="{ name: 'Categories'}">
+      <v-btn :to="{ name: 'Categories'}" height="56px">
         <span>Categories</span>
         <v-icon>mdi-table-of-contents</v-icon>
       </v-btn>
 
-      <v-btn :to="{ name: 'Settings'}">
+      <v-btn :to="{ name: 'Settings'}" height="56px">
         <span>Setings</span>
         <v-icon>mdi-cog</v-icon>
       </v-btn>

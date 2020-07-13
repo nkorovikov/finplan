@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div>
+    <last-week-graph v-if="graphEnabled" :data="lastFiveDays" />
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -35,12 +36,13 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
 import Category from "../models/Category";
+import LastWeekGraph from "../components/history/LastWeekGraph.vue";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: {}
+  components: { LastWeekGraph }
 })
 export default class History extends Vue {
   private dateFormatOptions: object = {
@@ -62,13 +64,41 @@ export default class History extends Vue {
   @expenses.Action
   deleteExpense!: (id: number) => void;
 
-  get expencesSum(): number {
-    let sum = 0;
-    this.sortedByCreatedAt.forEach((expence: Expense) => {
-      sum = sum + expence.getSum();
+  get lastFiveDays(): Array<number> {
+    let startOfNow = new Date().setHours(0, 0, 0, 0);
+    let endOfNow = new Date().setHours(23, 59, 59, 59);
+
+    const categories = this.sortedById;
+
+    const result: Array<number> = [];
+
+    [...Array(5).keys()].forEach(() => {
+      let sum = 0;
+      this.sortedByCreatedAt
+        .filter(a => {
+          const isOutcome = categories.find(
+            c => a.getCategoryId() === c.getId()
+          );
+          const isUnderInterval =
+            a.getCreatedAt() < endOfNow && a.getCreatedAt() > startOfNow;
+
+          return isOutcome && isOutcome.getType() && isUnderInterval;
+        })
+        .forEach(a => {
+          sum += a.getSum();
+        });
+      result.push(sum);
+      startOfNow = new Date(startOfNow).setDate(
+        new Date(startOfNow).getDate() - 1
+      );
+      endOfNow = new Date(endOfNow).setDate(new Date(endOfNow).getDate() - 1);
     });
 
-    return sum;
+    return result.filter(a => a > 0).reverse();
+  }
+
+  get graphEnabled(): boolean {
+    return this.lastFiveDays.length === 5;
   }
 
   public deleteHandler(id: number): void {

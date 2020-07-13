@@ -2,13 +2,13 @@ export default class Category {
     private id: number;
     private name: string
     private type: number
-    private cssClass: string
+    private icon: string
 
-    public constructor(id: number, name: string, type: number, cssClass: string) {
+    public constructor(id: number, name: string, type: number, icon: string) {
         this.id = id
         this.name = name
         this.type = type
-        this.cssClass = cssClass
+        this.icon = icon
     }
 
     public getId(): number {

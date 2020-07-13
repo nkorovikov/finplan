@@ -1,17 +1,24 @@
 <template>
-  <div class="container">
+  <div>
     <v-text-field :append-icon="icon" outlined @click:append="changeType" v-model.number="sum" />
-    <v-container>
-      <v-row v-for="(i) in Math.ceil(categories.length / 3)" :key="i" no-gutters>
+    <v-container v-if="thereAreNoCategories">
+      There are no categories.
+      <router-link tag="a" :to="{name: 'CategoriesCreate'}">Create</router-link>
+    </v-container>
+    <v-container v-else class="overflower-categories">
+      <v-row v-for="(i) in Math.ceil(categories.length / 2)" :key="i" no-gutters>
         <v-col
-          v-for="(category) in categories.slice((i - 1) * 3, (i - 1) * 3 + 3)"
+          v-for="(category) in categories.slice((i - 1) * 2, (i - 1) * 2 + 2)"
           :key="category.id"
           @click.prevent="saveExpenseHandler(category.id)"
-          
         >
           <v-card class="pa-4" tile outlined>
-            <i class="material-icons">{{ category.cssClass }}</i>
-            <span style="vertical-align: super;">{{ category.name }}</span>
+            <div>
+              <i class="material-icons">{{ category.icon }}</i>
+            </div>
+            <div>
+              <span style="vertical-align: super;">{{ category.name }}</span>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -33,7 +40,7 @@ const categories = namespace("Categories");
 })
 export default class Home extends Vue {
   private sum = 0;
-  private icon = "mdi-plus";
+  private icon = "mdi-minus";
 
   @expenses.Getter
   public sortedById!: Array<Expense>;
@@ -54,6 +61,10 @@ export default class Home extends Vue {
     return this.outcomes;
   }
 
+  get thereAreNoCategories(): boolean {
+    return this.categories.length === 0;
+  }
+
   public changeType(): void {
     if (this.icon === "mdi-plus") {
       this.icon = "mdi-minus";
@@ -63,7 +74,11 @@ export default class Home extends Vue {
   }
 
   public saveExpenseHandler(categoryId: number): void {
-    // @TODO validation
+    this.sum = Number(this.sum);
+
+    if (this.sum < 0 || this.sum === 0) {
+      return;
+    }
 
     const lastId: number = this.sortedById.length
       ? this.sortedById[this.sortedById.length - 1].getId()
@@ -77,3 +92,10 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.overflower-categories {
+  height: 400px;
+  overflow-y: scroll;
+}
+</style>

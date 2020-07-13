@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div>
     <v-text-field label="Name" outlined v-model.trim="category.name" />
     <v-select v-model.number="category.type" :items="types" label="Type" outlined></v-select>
-    <v-select v-model="category.cssClass" :items="cssClasses" label="Icon" outlined>
+    <v-select v-model="category.icon" :items="icons" label="Icon" outlined>
       <template v-slot:item="{item}">
         <div v-html="item.text" />
       </template>
@@ -11,7 +11,7 @@
       </template>
     </v-select>
     <div>
-      <v-btn @click.prevent="saveCategoryHandler">Save</v-btn>
+      <v-btn outlined @click.prevent="saveCategoryHandler">Save</v-btn>
     </div>
   </div>
 </template>
@@ -20,6 +20,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Category from "../models/Category";
+import CategoryIcons from "../sets/CategoryIcons";
+import CategorySelectTypes from "../sets/CategorySelectTypes";
 
 const categories = namespace("Categories");
 
@@ -28,26 +30,8 @@ const categories = namespace("Categories");
 })
 export default class CategoriesUpdate extends Vue {
   private category: Category = new Category(0, "", 1, "");
-  private types = [
-    {
-      text: "Income",
-      value: 1
-    },
-    {
-      text: "Outcome",
-      value: 2
-    }
-  ];
-  private cssClasses = [
-    {
-      text: "<i class='material-icons'>shopping_cart</i>",
-      value: "shopping_cart"
-    },
-    {
-      text: "<i class='material-icons'>account_balance</i>",
-      value: "account_balance"
-    }
-  ];
+  private types = CategorySelectTypes;
+  private icons = CategoryIcons;
 
   public async mounted() {
     this.category = await this.findById(Number(this.$route.params.id));
@@ -61,9 +45,7 @@ export default class CategoriesUpdate extends Vue {
 
   public saveCategoryHandler(): void {
     // @TODO validation
-
     this.updateCategory(this.category.getId(), this.category);
-
     this.$router.push({ name: "Categories" });
   }
 }

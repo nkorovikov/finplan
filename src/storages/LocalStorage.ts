@@ -28,7 +28,7 @@ export default class LocalStorage {
                 category.id,
                 category.name,
                 category.type,
-                category.cssClass,
+                category.icon,
             ));
     }
 
