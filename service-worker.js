@@ -1,4 +1,4 @@
-importScripts("/finplan/precache-manifest.f5cf1b62362a89f653168ddeca4f8fcf.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/finplan/precache-manifest.73ff86473b457d0b3fad5eb3fac9916c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.setCacheNameDetails({ prefix: 'd4' })
 
