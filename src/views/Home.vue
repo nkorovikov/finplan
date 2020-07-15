@@ -42,6 +42,9 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar v-model="snackbar" :timeout="1000">
+      Added!
+    </v-snackbar>
   </div>
 </template>
 
@@ -62,6 +65,7 @@ export default class Home extends Vue {
   private icon = "mdi-minus";
   private createdAt = new Date().toISOString().substr(0, 10);
   private menu = false;
+  private snackbar = false;
 
   @expenses.Getter
   public sortedById!: Array<Expense>;
@@ -115,6 +119,7 @@ export default class Home extends Vue {
     );
 
     this.sum = 0;
+    this.snackbar = true;
   }
 }
 </script>
