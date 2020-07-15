@@ -49,10 +49,6 @@ export default class History extends Vue {
     year: "numeric",
     month: "numeric",
     day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: false
   };
 
   @expenses.Getter

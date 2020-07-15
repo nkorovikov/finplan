@@ -110,7 +110,7 @@ export default class Home extends Vue {
         lastId + 1,
         this.sum,
         categoryId,
-        new Date(this.createdAt).getTime()
+        new Date(this.createdAt).getTime() // saving in GMT
       )
     );
 

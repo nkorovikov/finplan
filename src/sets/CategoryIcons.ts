@@ -42,5 +42,17 @@ export default [
     {
         text: "<i class='material-icons'>local_taxi</i>",
         value: "local_taxi"
+    },
+    {
+        text: "<i class='material-icons'>restaurant</i>",
+        value: "restaurant"
+    },
+    {
+        text: "<i class='material-icons'>local_shipping</i>",
+        value: "local_shipping"
+    },
+    {
+        text: "<i class='material-icons'>local_cafe</i>",
+        value: "local_cafe"
     }
 ];

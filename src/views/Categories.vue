@@ -6,7 +6,7 @@
         <tbody>
           <tr v-for="category in categories" :key="category.id">
             <td>
-              <i class="material-icons">{{ category.icon }}</i>
+              <i class="material-icons mr-1">{{ category.icon }}</i>
               <span style="vertical-align: super;">{{ category.name }}</span>
             </td>
             <td class="text-right">
