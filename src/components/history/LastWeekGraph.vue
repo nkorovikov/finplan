@@ -1,42 +1,32 @@
 <template>
   <div>
-    <h3>Last five days outcomes</h3>
+    <h3>Last week outcomes</h3>
     <v-sparkline
       :value="data"
       :gradient="gradient"
-      :smooth="radius || false"
-      :padding="padding"
+      :smooth="15"
       :line-width="lineWidth"
       :stroke-linecap="lineCap"
       :gradient-direction="gradientDirection"
-      :fill="fill"
       :type="type"
-      :auto-line-width="autoLineWidth"
       auto-draw
-      :show-labels="showLabels"
-      :label-size="labelSize"
+      auto-draw-easing="ease-in-out"
     ></v-sparkline>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component({
   components: {}
 })
 export default class History extends Vue {
-  private showLabels = false;
   private lineWidth = 1;
-  private labelSize = 10;
-  private radius = 20;
-  private padding = 0;
   private lineCap = "round";
   private gradient = ["red", "orange", "yellow", "green"];
   private gradientDirection = "top";
-  private fill = false;
   private type = "trend";
-  private autoLineWidth = false;
 
   @Prop() readonly data!: Array<any>;
 }

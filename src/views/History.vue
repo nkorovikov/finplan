@@ -1,6 +1,6 @@
 <template>
   <div>
-    <last-week-graph v-if="graphEnabled" :data="lastFiveDays" />
+    <last-week-graph :data="lastWeek" />
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -48,7 +48,7 @@ export default class History extends Vue {
   private dateFormatOptions: object = {
     year: "numeric",
     month: "numeric",
-    day: "numeric",
+    day: "numeric"
   };
 
   @expenses.Getter
@@ -60,7 +60,7 @@ export default class History extends Vue {
   @expenses.Action
   deleteExpense!: (id: number) => void;
 
-  get lastFiveDays(): Array<number> {
+  get lastWeek(): Array<number> {
     let startOfNow = new Date().setHours(0, 0, 0, 0);
     let endOfNow = new Date().setHours(23, 59, 59, 59);
 
@@ -68,7 +68,7 @@ export default class History extends Vue {
 
     const result: Array<number> = [];
 
-    [...Array(5).keys()].forEach(() => {
+    [...Array(7).keys()].forEach(() => {
       let sum = 0;
       this.sortedByCreatedAt
         .filter(a => {
@@ -90,11 +90,7 @@ export default class History extends Vue {
       endOfNow = new Date(endOfNow).setDate(new Date(endOfNow).getDate() - 1);
     });
 
-    return result.filter(a => a > 0).reverse();
-  }
-
-  get graphEnabled(): boolean {
-    return this.lastFiveDays.length === 5;
+    return result.reverse();
   }
 
   public deleteHandler(id: number): void {
