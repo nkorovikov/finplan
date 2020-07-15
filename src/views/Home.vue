@@ -1,6 +1,25 @@
 <template>
   <div>
-    <v-text-field :append-icon="icon" outlined @click:append="changeType" v-model.number="sum" />
+    <v-text-field
+      hide-details
+      :append-icon="icon"
+      outlined
+      @click:append="changeType"
+      v-model.number="sum"
+    />
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      :nudge-right="40"
+      transition="scale-transition"
+      offset-y
+      min-width="290px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field v-model="createdAt" prepend-icon="event" readonly v-bind="attrs" v-on="on"></v-text-field>
+      </template>
+      <v-date-picker v-model="createdAt" @input="menu = false"></v-date-picker>
+    </v-menu>
     <v-container v-if="thereAreNoCategories">
       There are no categories.
       <router-link tag="a" :to="{name: 'CategoriesCreate'}">Create</router-link>
@@ -41,6 +60,8 @@ const categories = namespace("Categories");
 export default class Home extends Vue {
   private sum = 0;
   private icon = "mdi-minus";
+  private createdAt = new Date().toISOString().substr(0, 10);
+  private menu = false;
 
   @expenses.Getter
   public sortedById!: Array<Expense>;
@@ -85,7 +106,12 @@ export default class Home extends Vue {
       : 0;
 
     this.saveExpense(
-      new Expense(lastId + 1, this.sum, categoryId, new Date().getTime())
+      new Expense(
+        lastId + 1,
+        this.sum,
+        categoryId,
+        new Date(this.createdAt).getTime()
+      )
     );
 
     this.sum = 0;
@@ -95,7 +121,7 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 .overflower-categories {
-  height: 400px;
+  height: 375px;
   overflow-y: scroll;
 }
 </style>
