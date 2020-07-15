@@ -9,6 +9,17 @@
         <v-list-item-content>
           <v-list-item-title>Update app</v-list-item-title>
         </v-list-item-content>
+        
+      </v-list-item>
+      <v-list-item :to="{name: 'About'}">
+        <v-list-item-icon>
+          <v-icon>mdi-information-outline</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>About</v-list-item-title>
+        </v-list-item-content>
+        
       </v-list-item>
     </v-list>
   </v-card>

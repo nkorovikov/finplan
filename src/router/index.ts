@@ -34,7 +34,11 @@ const routes: Array<RouteConfig> = [
     path: '/settings',
     name: 'Settings',
     component: () => import('../views/Settings.vue'),
-    props: true
+  },
+  {
+    path: '/settings/about',
+    name: 'About',
+    component: () => import('../views/About.vue'),
   },
 ];
 
