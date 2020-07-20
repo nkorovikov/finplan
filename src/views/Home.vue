@@ -2,10 +2,11 @@
   <div>
     <v-text-field
       hide-details
+      type="tel"
       :append-icon="icon"
       outlined
       @click:append="changeType"
-      v-model.number="sum"
+      v-model.trim="sum"
     />
     <v-menu
       v-model="menu"
@@ -42,9 +43,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-snackbar v-model="snackbar" :timeout="1000">
-      Added!
-    </v-snackbar>
+    <v-snackbar v-model="snackbar" :timeout="1000">Added!</v-snackbar>
   </div>
 </template>
 
@@ -61,7 +60,7 @@ const categories = namespace("Categories");
   components: {}
 })
 export default class Home extends Vue {
-  private sum = 0;
+  private sum = "";
   private icon = "mdi-minus";
   private createdAt = new Date().toISOString().substr(0, 10);
   private menu = false;
@@ -99,9 +98,9 @@ export default class Home extends Vue {
   }
 
   public saveExpenseHandler(categoryId: number): void {
-    this.sum = Number(this.sum);
+    const numSum = Number(this.sum);
 
-    if (this.sum < 0 || this.sum === 0) {
+    if (numSum < 0 || numSum === 0) {
       return;
     }
 
@@ -112,13 +111,13 @@ export default class Home extends Vue {
     this.saveExpense(
       new Expense(
         lastId + 1,
-        this.sum,
+        numSum,
         categoryId,
         new Date(this.createdAt).getTime() // saving in GMT
       )
     );
 
-    this.sum = 0;
+    this.sum = "";
     this.snackbar = true;
   }
 }
