@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <v-app>
-    <public-layout>
-      <router-view />
-    </public-layout>
+      <public-layout>
+          <router-view />
+      </public-layout>
     </v-app>
   </div>
 </template>
@@ -21,5 +21,5 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-@import '~material-design-icons/iconfont/material-icons.css';
+@import "~material-design-icons/iconfont/material-icons.css";
 </style>

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <nav-bar :back-button="{
+      show: true,
+      to: 'Categories'
+    }" />
     <v-text-field label="Name" outlined v-model.trim="category.name" />
     <v-select v-model.number="category.type" :items="types" label="Type" outlined></v-select>
     <v-select v-model="category.icon" :items="icons" label="Icon" outlined>
@@ -22,11 +26,14 @@ import { namespace } from "vuex-class";
 import Category from "../models/Category";
 import CategoryIcons from "../sets/CategoryIcons";
 import CategorySelectTypes from "../sets/CategorySelectTypes";
+import NavBar from "@/components/navbar/NavBar.vue";
 
 const categories = namespace("Categories");
 
 @Component({
-  components: {}
+  components: {
+    NavBar
+  }
 })
 export default class CategoriesUpdate extends Vue {
   private category: Category = new Category(0, "", 1, "");

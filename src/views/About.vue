@@ -2,7 +2,7 @@
   <v-card max-width="344" class="mx-auto">
     <v-list-item>
       <v-list-item-avatar color="grey">
-        <v-img src="/img/icons/android-chrome-192x192.png"></v-img>
+        <v-img :src="'/img/icons/android-chrome-192x192.png'"></v-img>
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="headline">Finplan</v-list-item-title>

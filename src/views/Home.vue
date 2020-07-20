@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nav-bar />
     <v-text-field
       hide-details
       type="tel"
@@ -43,6 +44,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-btn outlined block :to="{ name: 'Categories'}">Categories</v-btn>
     <v-snackbar v-model="snackbar" :timeout="1000">Added!</v-snackbar>
   </div>
 </template>
@@ -52,12 +54,15 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
 import Category from "../models/Category";
+import NavBar from "@/components/navbar/NavBar.vue";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: {}
+  components: {
+    NavBar
+  }
 })
 export default class Home extends Vue {
   private sum = "";

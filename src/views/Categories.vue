@@ -1,5 +1,9 @@
 <template>
   <div>
+    <nav-bar :back-button="{
+      show: true,
+      to: 'Home'
+    }" />
     <v-btn v-if="typeSwitcherEnabled" @click.prevent="changeType" outlined>{{ types[type] }}</v-btn>
     <v-simple-table>
       <template v-slot:default>
@@ -36,12 +40,15 @@
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Category from "../models/Category";
+import NavBar from "@/components/navbar/NavBar.vue";
 
 const categories = namespace("Categories");
 const expenses = namespace("Expenses");
 
 @Component({
-  components: {}
+  components: {
+    NavBar
+  }
 })
 export default class Categories extends Vue {
   private type = 1;
