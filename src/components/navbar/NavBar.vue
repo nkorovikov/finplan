@@ -27,8 +27,5 @@ export default class NavBar extends Vue {
     }
   })
   readonly backButton!: IBackButton;
-  mounted() {
-    console.log(this.$route);
-  }
 }
 </script>
