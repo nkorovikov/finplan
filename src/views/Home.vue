@@ -130,7 +130,7 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 .overflower-categories {
-  height: 375px;
+  height: 365px;
   overflow-y: scroll;
 }
 </style>

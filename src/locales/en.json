@@ -1,7 +1,8 @@
 {
     "menu": {
         "history": "History",
-        "home": "Home"
+        "home": "Home",
+        "report": "Report"
     },
     "home": {
         "categories": "Categories",

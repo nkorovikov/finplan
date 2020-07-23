@@ -15,6 +15,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/History.vue')
   },
   {
+    path: '/report',
+    name: 'Report',
+    component: () => import('../views/Report.vue'),
+  },
+  {
     path: '/categories',
     name: 'Categories',
     component: () => import('../views/Categories.vue')

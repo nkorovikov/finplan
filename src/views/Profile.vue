@@ -14,13 +14,13 @@
     <v-text-field
       :label="$t('profile.week-budget')"
       outlined
-      v-model.number="profile.weekBudget"
+      v-model.number="profile.weeklyBudget"
       type="tel"
     />
     <v-text-field
       :label="$t('profile.month-budget')"
       outlined
-      v-model.number="profile.monthBudget"
+      v-model.number="profile.monthlyBudget"
       type="tel"
     />
     <v-radio-group v-model="profile.locale" row>

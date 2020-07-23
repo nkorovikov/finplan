@@ -1,6 +1,9 @@
 <template>
   <div>
-    <last-week-graph :data="lastWeek" />
+    <nav-bar :back-button="{
+      show: true,
+      to: 'Report'
+    }" />
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -36,13 +39,15 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
 import Category from "../models/Category";
-import LastWeekGraph from "../components/history/LastWeekGraph.vue";
+import NavBar from "@/components/navbar/NavBar.vue";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: { LastWeekGraph }
+  components: {
+    NavBar
+  }
 })
 export default class History extends Vue {
   private dateFormatOptions: object = {

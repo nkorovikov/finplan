@@ -6,9 +6,9 @@
       </v-container>
     </v-main>
     <v-bottom-navigation app ansolute grow>
-      <v-btn :to="{ name: 'History'}" height="56px">
-        <span>{{ $t('menu.history') }}</span>
-        <v-icon>mdi-history</v-icon>
+      <v-btn :to="{ name: 'Report'}" height="56px">
+        <span>{{ $t('menu.report') }}</span>
+        <v-icon>mdi-chart-donut</v-icon>
       </v-btn>
 
       <v-btn exact :to="{ name: 'Home'}" height="56px">

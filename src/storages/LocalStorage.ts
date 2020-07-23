@@ -51,8 +51,8 @@ export default class LocalStorage {
         return new Profile(
             profile.name,
             profile.dailyBudget,
-            profile.weekBudget,
-            profile.monthBudget,
+            profile.weeklyBudget,
+            profile.monthlyBudget,
             profile.locale,
         );
     }

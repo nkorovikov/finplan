@@ -22,7 +22,7 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
   components: {}
 })
 export default class History extends Vue {
-  private lineWidth = 1;
+  private lineWidth = 2;
   private lineCap = "round";
   private gradient = ["red", "orange", "yellow", "green"];
   private gradientDirection = "top";
