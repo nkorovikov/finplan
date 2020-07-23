@@ -1,10 +1,10 @@
 export default [
     {
-        text: "Income",
+        text: '+',
         value: 1
     },
     {
-        text: "Outcome",
+        text: '-',
         value: 2
     }
 ];

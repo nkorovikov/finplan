@@ -15,7 +15,9 @@
         "title": "Title",
         "type": "Type",
         "icon": "Icon",
-        "save": "Save"
+        "save": "Save",
+        "income": "Income",
+        "outcome": "Outcome"
     },
     "history": {
         "date": "Date",

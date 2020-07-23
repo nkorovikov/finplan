@@ -5,7 +5,6 @@
       to: 'Categories'
     }" />
     <v-text-field :label="$t('categories.title')" outlined v-model.trim="category.name" />
-    <v-select v-model.number="category.type" :items="types" :label="$t('categories.type')" outlined></v-select>
     <v-select v-model="category.icon" :items="icons" :label="$t('categories.icon')" outlined>
       <template v-slot:item="{item}">
         <div v-html="item.text" />
@@ -14,6 +13,10 @@
         <div v-html="item.text" />
       </template>
     </v-select>
+    <v-radio-group v-model.number="category.type" row>
+      <v-radio :label="$t('categories.income')" :value="1"></v-radio>
+      <v-radio :label="$t('categories.outcome')" :value="2"></v-radio>
+    </v-radio-group>
     <div>
       <v-btn outlined @click.prevent="saveCategoryHandler">{{ $t('categories.save') }}</v-btn>
     </div>
