@@ -7,7 +7,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>Update app</v-list-item-title>
+          <v-list-item-title>{{ $t('settings.update') }}</v-list-item-title>
         </v-list-item-content>
         
       </v-list-item>
@@ -17,7 +17,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>About</v-list-item-title>
+          <v-list-item-title>{{ $t('settings.about') }}</v-list-item-title>
         </v-list-item-content>
         
       </v-list-item>

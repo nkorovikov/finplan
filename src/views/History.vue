@@ -5,9 +5,9 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">Date</th>
-            <th class="text-left">Category</th>
-            <th class="text-right text-no-wrap">Sum</th>
+            <th class="text-left">{{ $t('history.date') }}</th>
+            <th class="text-left">{{ $t('history.category') }}</th>
+            <th class="text-right text-no-wrap">{{ $t('history.sum') }}</th>
             <th class="text-right"></th>
           </tr>
         </thead>

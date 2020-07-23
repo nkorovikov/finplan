@@ -1,0 +1,32 @@
+{
+    "menu": {
+        "history": "История",
+        "home": "Главная"
+    },
+    "home": {
+        "categories": "Категории",
+        "no-categories": "Категории отсутствуют",
+        "create": "Добавить",
+        "added": "Добавлено"
+    },
+    "categories": {
+        "create": "Добавить",
+        "title": "Название",
+        "type": "Тип",
+        "icon": "Иконка",
+        "save": "Сохранить"
+    },
+    "history": {
+        "date": "Дата",
+        "category": "Категория",
+        "sum": "Сумма",
+        "last-week-outcomes": "Расходы за неделю"
+    },
+    "settings": {
+        "update": "Обновить приложение",
+        "about": "О приложении"
+    },
+    "about": {
+        "control-finances": "Контролируйте свои финансы"
+    }
+}

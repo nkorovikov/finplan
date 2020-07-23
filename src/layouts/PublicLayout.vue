@@ -7,12 +7,12 @@
     </v-main>
     <v-bottom-navigation app ansolute grow>
       <v-btn :to="{ name: 'History'}" height="56px">
-        <span>History</span>
+        <span>{{ $t('menu.history') }}</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
 
       <v-btn exact :to="{ name: 'Home'}" height="56px">
-        <span>Home</span>
+        <span>{{ $t('menu.home') }}</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
     </v-bottom-navigation>

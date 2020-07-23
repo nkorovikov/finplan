@@ -10,7 +10,7 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-card-text>Control your finances</v-card-text>
+    <v-card-text>{{ $t('about.control-finances') }}</v-card-text>
 
     <v-card-actions>
       <v-btn icon href="https://github.com/nkorovikov/finplan" target="_blank">

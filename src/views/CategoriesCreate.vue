@@ -4,9 +4,9 @@
       show: true,
       to: 'Categories'
     }" />
-    <v-text-field label="Name" outlined v-model.trim="name" />
-    <v-select v-model.number="type" :items="types" label="Type" outlined></v-select>
-    <v-select v-model="icon" :items="icons" label="Icon" outlined>
+    <v-text-field :label="$t('categories.title')" outlined v-model.trim="name" />
+    <v-select v-model.number="type" :items="types" :label="$t('categories.type')" outlined></v-select>
+    <v-select v-model="icon" :items="icons" :label="$t('categories.icon')" outlined>
       <template v-slot:item="{item}">
         <div v-html="item.text" />
       </template>
@@ -15,7 +15,7 @@
       </template>
     </v-select>
     <div>
-      <v-btn outlined @click.prevent="saveCategoryHandler">Save</v-btn>
+      <v-btn outlined @click.prevent="saveCategoryHandler">{{ $t('categories.save') }}</v-btn>
     </div>
   </div>
 </template>

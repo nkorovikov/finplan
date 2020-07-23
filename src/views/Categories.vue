@@ -31,7 +31,7 @@
     </v-simple-table>
     <v-btn outlined :to="{name: 'CategoriesCreate'}">
       <i class="material-icons">add</i>
-      Create
+      {{ $t('categories.create') }}
     </v-btn>
   </div>
 </template>

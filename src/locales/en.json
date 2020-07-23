@@ -1,0 +1,32 @@
+{
+    "menu": {
+        "history": "History",
+        "home": "Home"
+    },
+    "home": {
+        "categories": "Categories",
+        "no-categories": "There are no categories",
+        "create": "Create",
+        "added": "Added"
+    },
+    "categories": {
+        "create": "Create",
+        "title": "Title",
+        "type": "Type",
+        "icon": "Icon",
+        "save": "Save"
+    },
+    "history": {
+        "date": "Date",
+        "category": "Category",
+        "sum": "Sum",
+        "last-week-outcomes": "Last week outcomes"
+    },
+    "settings": {
+        "update": "Update app",
+        "about": "About"
+    },
+    "about": {
+        "control-finances": "Control your finances"
+    }
+}

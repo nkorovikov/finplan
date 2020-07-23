@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Last week outcomes</h3>
+    <h3>{{ $t('history.last-week-outcomes') }}</h3>
     <v-sparkline
       :value="data"
       :gradient="gradient"

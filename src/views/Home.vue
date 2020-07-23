@@ -23,8 +23,8 @@
       <v-date-picker v-model="createdAt" @input="menu = false"></v-date-picker>
     </v-menu>
     <v-container v-if="thereAreNoCategories">
-      There are no categories.
-      <router-link tag="a" :to="{name: 'CategoriesCreate'}">Create</router-link>
+      {{ $t('home.no-categories') }}.
+      <router-link tag="a" :to="{name: 'CategoriesCreate'}">{{ $t('home.create') }}</router-link>
     </v-container>
     <v-container v-else class="overflower-categories">
       <v-row v-for="(i) in Math.ceil(categories.length / 2)" :key="i" no-gutters>
@@ -44,8 +44,8 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-btn outlined block :to="{ name: 'Categories'}">Categories</v-btn>
-    <v-snackbar v-model="snackbar" :timeout="1000">Added!</v-snackbar>
+    <v-btn outlined block :to="{ name: 'Categories'}">{{ $t('home.categories') }}</v-btn>
+    <v-snackbar v-model="snackbar" :timeout="1000">{{ $t('home.added') }}!</v-snackbar>
   </div>
 </template>
 
