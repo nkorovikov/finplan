@@ -1,6 +1,6 @@
 <template>
   <v-app-bar dark dense flat app>
-    <v-btn icon v-if="backButton.show" :to="{ name: backButton.to}">
+    <v-btn exact icon v-if="backButton.show" :to="{ name: backButton.to}">
       <v-icon>mdi-arrow-left</v-icon>
     </v-btn>
 
