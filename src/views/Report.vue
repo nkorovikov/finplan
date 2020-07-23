@@ -1,5 +1,10 @@
 <template>
   <div>
+    <v-tabs centered grow>
+      <v-tab>{{ $t('report.outcomes') }}</v-tab>
+      <v-tab disabled>{{ $t('report.incomes') }}</v-tab>
+    </v-tabs>
+    <br />
     <last-week-graph :data="lastWeek" />
     <budget
       :daily-budget="dailyBudget"

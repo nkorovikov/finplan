@@ -42,6 +42,8 @@
         "saved": "Сохранено"
     },
     "report": {
-        "budget": "Бюджет"
+        "budget": "Бюджет",
+        "incomes": "Доходы",
+        "outcomes": "Расходы"
     }
 }

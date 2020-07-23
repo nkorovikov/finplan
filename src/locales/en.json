@@ -40,5 +40,10 @@
         "month-budget": "Monthly budget",
         "save": "Save",
         "saved": "Saved"
+    },
+    "report": {
+        "budget": "Бюджет",
+        "incomes": "Incomes",
+        "outcomes": "Outcomes"
     }
 }
