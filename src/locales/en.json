@@ -24,9 +24,18 @@
     },
     "settings": {
         "update": "Update app",
-        "about": "About"
+        "about": "About",
+        "profile": "Profile"
     },
     "about": {
         "control-finances": "Control your finances"
+    },
+    "profile": {
+        "name": "Name",
+        "daily-budget": "Daily budget",
+        "week-budget": "Weekly budget",
+        "month-budget": "Monthly budget",
+        "save": "Save",
+        "saved": "Saved"
     }
 }

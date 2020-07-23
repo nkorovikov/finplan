@@ -40,6 +40,11 @@ const routes: Array<RouteConfig> = [
     name: 'About',
     component: () => import('../views/About.vue'),
   },
+  {
+    path: '/settings/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
+  },
 ];
 
 const router = new VueRouter({

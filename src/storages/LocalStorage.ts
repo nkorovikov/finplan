@@ -1,5 +1,6 @@
 import Expense from '@/models/Expense';
 import Category from '@/models/Category';
+import Profile from '@/models/Profile';
 
 export default class LocalStorage {
     public getExpenses(): Array<Expense> {
@@ -34,5 +35,29 @@ export default class LocalStorage {
 
     public syncCategories(categories: Array<Category>): void {
         localStorage.setItem("categories", JSON.stringify(categories));
+    }
+
+    getProfile(): Profile {
+        if (!localStorage.profile) {
+            return new Profile(
+                '',
+                0,
+                0,
+                0,
+                'ru',
+            );
+        }
+        const profile: any = JSON.parse(localStorage.profile)
+        return new Profile(
+            profile.name,
+            profile.dailyBudget,
+            profile.weekBudget,
+            profile.monthBudget,
+            profile.locale,
+        );
+    }
+
+    syncProfile(profile: Profile): void {
+        localStorage.setItem("profile", JSON.stringify(profile));
     }
 }
