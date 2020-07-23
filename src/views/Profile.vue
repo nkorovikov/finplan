@@ -4,7 +4,7 @@
       show: true,
       to: 'Settings'
     }" />
-    <v-text-field :label="$t('profile.name')" outlined v-model.trim="profile.name" type="tel" />
+    <v-text-field :label="$t('profile.name')" outlined v-model.trim="profile.name" />
     <v-text-field
       :label="$t('profile.daily-budget')"
       outlined
