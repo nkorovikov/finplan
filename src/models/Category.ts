@@ -11,6 +11,10 @@ export default class Category {
         this.icon = icon
     }
 
+    public getName(): string {
+        return this.name;
+    }
+
     public getId(): number {
         return this.id
     }

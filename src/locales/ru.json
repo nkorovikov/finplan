@@ -44,6 +44,7 @@
     "report": {
         "budget": "Бюджет",
         "incomes": "Доходы",
-        "outcomes": "Расходы"
+        "outcomes": "Расходы",
+        "by-categories": "По категориям"
     }
 }

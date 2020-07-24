@@ -6,11 +6,16 @@
     </v-tabs>
     <br />
     <last-week-graph :data="lastWeek" />
+    <br />
     <budget
       :daily-budget="dailyBudget"
       :weekly-budget="weeklyBudget"
       :monthly-budget="monthlyBudget"
     />
+    <h3>{{ $t('report.by-categories') }}</h3>
+    <v-container>
+      <by-categories :chartdata="barData" :options="barOptions" />
+    </v-container>
     <v-btn outlined block :to="{ name: 'History'}">
       <v-icon>mdi-history</v-icon>
       <v-spacer />
@@ -26,18 +31,18 @@ import Expense from "../models/Expense";
 import Category from "../models/Category";
 import LastWeekGraph from "../components/report/LastWeekGraph.vue";
 import Budget from "../components/report/Budget.vue";
+import ByCategories from "../components/report/ByCategories.vue";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: { LastWeekGraph, Budget }
+  components: { LastWeekGraph, Budget, ByCategories }
 })
 export default class Report extends Vue {
-  private dateFormatOptions: object = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric"
+  private barOptions = {
+    responsive: true,
+    maintainAspectRatio: false
   };
 
   @expenses.Getter
@@ -47,7 +52,45 @@ export default class Report extends Vue {
   public sortedById!: Array<Category>;
 
   @expenses.Action
-  deleteExpense!: (id: number) => void;
+  getByCategoryId!: (id: number) => Array<Expense>;
+
+  get barData(): any {
+    // @TODO interfaces
+    const labels: any = [];
+    const data: any = [];
+    [...this.sortedById].forEach((c: Category) => {
+      const expenses = [...this.sortedByCreatedAt].filter(
+        (expense: Expense) => expense.getCategoryId() === c.getId()
+      );
+      let sum = 0;
+      expenses.forEach((e: Expense) => {
+        sum += e.getSum();
+      });
+
+      if (sum === 0) {
+        return;
+      }
+
+      labels.push(c.getName());
+      data.push(sum);
+    });
+    return {
+      labels: labels,
+      datasets: [
+        {
+          backgroundColor: [
+            "#3D5AFE",
+            "#EEFF41",
+            "#004D40",
+            "#4DB6AC",
+            "#40C4FF",
+            "#7C4DFF"
+          ],
+          data: data
+        }
+      ]
+    };
+  }
 
   get lastWeek(): Array<number> {
     let startOfNow = new Date().setHours(0, 0, 0, 0);

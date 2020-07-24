@@ -58,4 +58,9 @@ export default class Expenses extends VuexModule {
         this.context.commit('delete', id)
         storage.syncExpenses(this.expenses)
     }
+
+    @Action
+    getByCategoryId(id: number): Array<Expense> {
+        return this.expenses.filter((expense: Expense) => expense.getCategoryId() === id);
+    }
 }
