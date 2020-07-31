@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card dark color="#00B8D4" class="pl-2 pt-3 pr-2">
     <template v-if="profile.dailyBudget > 0">
       <v-tooltip color="black" open-on-click :open-on-hover="false" right>
         <template v-slot:activator="{ on, attrs }">
@@ -11,7 +11,7 @@
         rounded
         :height="lineWidth"
         :value="dailyBudgetProgress"
-        :color="dailyBudgetProgress === 100 ? 'red' : 'success'"
+        :color="dailyBudgetProgress === 100 ? 'red' : '#C0CA33'"
       />
       <br />
     </template>
@@ -26,7 +26,7 @@
         rounded
         :height="lineWidth"
         :value="weeklyBudgetProgress"
-        :color="weeklyBudgetProgress === 100 ? 'red' : 'success'"
+        :color="weeklyBudgetProgress === 100 ? 'red' : '#C0CA33'"
       />
       <br />
     </template>
@@ -41,11 +41,11 @@
         rounded
         :height="lineWidth"
         :value="monthlyBudgetProgress"
-        :color="monthlyBudgetProgress === 100 ? 'red' : 'success'"
+        :color="monthlyBudgetProgress === 100 ? 'red' : '#C0CA33'"
       />
       <br />
     </template>
-  </div>
+  </v-card>
 </template>
 
 <script lang="ts">

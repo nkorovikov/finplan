@@ -6,16 +6,26 @@
     </v-tabs>
     <br />
     <last-week-graph :data="lastWeek" />
+
     <br />
+
     <budget
       :daily-budget="dailyBudget"
       :weekly-budget="weeklyBudget"
       :monthly-budget="monthlyBudget"
     />
-    <h3>{{ $t('report.by-categories') }}</h3>
-    <v-container>
-      <by-categories :chartdata="barData" :options="barOptions" />
-    </v-container>
+
+    <br />
+
+    <v-card color="#B2EBF2" class="pl-2 pt-3 pr-2">
+      <h3>{{ $t('report.by-categories') }}</h3>
+      <v-container>
+        <by-categories :chartdata="barData" :options="barOptions" />
+      </v-container>
+    </v-card>
+
+    <br />
+
     <v-btn outlined block :to="{ name: 'History'}">
       <v-icon>mdi-history</v-icon>
       <v-spacer />
@@ -78,14 +88,17 @@ export default class Report extends Vue {
       labels: labels,
       datasets: [
         {
+          borderColor: "#B2EBF2",
           backgroundColor: [
-            "#3D5AFE",
-            "#EEFF41",
-            "#004D40",
-            "#4DB6AC",
-            "#40C4FF",
-            "#7C4DFF"
-          ],
+            "#FFD0B0",
+            "#FFC0A0",
+            "#FFB090",
+            "#FFA080",
+            "#FF9070",
+            "#FF8060",
+            "#FF7050",
+            "#FF6040",
+            ],
           data: data
         }
       ]

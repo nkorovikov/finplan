@@ -1,11 +1,11 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from "vue-property-decorator";
-import { Pie } from "vue-chartjs";
+import { Doughnut } from "vue-chartjs";
 
 @Component({
   components: {}
 })
-export default class ByCategories extends Mixins(Pie) {
+export default class ByCategories extends Mixins(Doughnut) {
   @Prop({
     default: (): any => null
   })
