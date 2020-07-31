@@ -42,9 +42,9 @@
         "saved": "Saved"
     },
     "report": {
-        "budget": "Бюджет",
+        "budget": "Budget",
         "incomes": "Incomes",
         "outcomes": "Outcomes",
-        "by-categories": "По категориям"
+        "by-categories": "By categories"
     }
 }
