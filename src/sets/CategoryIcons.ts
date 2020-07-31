@@ -54,5 +54,17 @@ export default [
     {
         text: "<i class='material-icons'>local_cafe</i>",
         value: "local_cafe"
+    },
+    {
+        text: "<i class='material-icons'>videogame_asset</i>",
+        value: "videogame_asset"
+    },
+    {
+        text: "<i class='material-icons'>directions_subway</i>",
+        value: "directions_subway"
+    },
+    {
+        text: "<i class='material-icons'>fitness_center</i>",
+        value: "fitness_center"
     }
 ];
