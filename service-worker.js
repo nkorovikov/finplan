@@ -1,4 +1,4 @@
-importScripts("/finplan/precache-manifest.600f82148f84bd7388f047f1a32f0243.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/finplan/precache-manifest.f6889e4bc10ed9fba6d990c81ff23aa6.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
