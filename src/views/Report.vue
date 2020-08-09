@@ -5,8 +5,8 @@
       <v-tab disabled>{{ $t('report.incomes') }}</v-tab>
     </v-tabs>
     <br />
-    <last-week-graph :data="lastWeek" />
 
+    <last-week-graph :data="lastWeek" />
     <br />
 
     <budget
@@ -14,16 +14,9 @@
       :weekly-budget="weeklyBudget"
       :monthly-budget="monthlyBudget"
     />
-
     <br />
 
-    <v-card color="#B2EBF2" class="pl-2 pt-3 pr-2">
-      <h3>{{ $t('report.by-categories') }}</h3>
-      <v-container>
-        <by-categories :chartdata="barData" :options="barOptions" />
-      </v-container>
-    </v-card>
-
+    <by-categories />
     <br />
 
     <v-btn outlined block :to="{ name: 'History'}">
@@ -42,6 +35,7 @@ import Category from "../models/Category";
 import LastWeekGraph from "../components/report/LastWeekGraph.vue";
 import Budget from "../components/report/Budget.vue";
 import ByCategories from "../components/report/ByCategories.vue";
+import ReportService from "@/services/ReportService";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
@@ -50,10 +44,7 @@ const categories = namespace("Categories");
   components: { LastWeekGraph, Budget, ByCategories }
 })
 export default class Report extends Vue {
-  private barOptions = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
+  private reportService = new ReportService();
 
   @expenses.Getter
   public sortedByCreatedAt!: Array<Expense>;
@@ -64,121 +55,35 @@ export default class Report extends Vue {
   @expenses.Action
   getByCategoryId!: (id: number) => Array<Expense>;
 
-  get barData(): any {
-    // @TODO interfaces
-    const labels: any = [];
-    const data: any = [];
-    [...this.sortedById].forEach((c: Category) => {
-      const expenses = [...this.sortedByCreatedAt].filter(
-        (expense: Expense) => expense.getCategoryId() === c.getId()
-      );
-      let sum = 0;
-      expenses.forEach((e: Expense) => {
-        sum += e.getSum();
-      });
-
-      if (sum === 0) {
-        return;
-      }
-
-      labels.push(c.getName());
-      data.push(sum);
-    });
-    return {
-      labels: labels,
-      datasets: [
-        {
-          borderColor: "#B2EBF2",
-          backgroundColor: [
-            "#FFD0B0",
-            "#FFC0A0",
-            "#FFB090",
-            "#FFA080",
-            "#FF9070",
-            "#FF8060",
-            "#FF7050",
-            "#FF6040",
-            ],
-          data: data
-        }
-      ]
-    };
-  }
-
   get lastWeek(): Array<number> {
-    let startOfNow = new Date().setHours(0, 0, 0, 0);
-    let endOfNow = new Date().setHours(23, 59, 59, 59);
-
-    const categories = this.sortedById;
-
-    const result: Array<number> = [];
-
-    [...Array(7).keys()].forEach(() => {
-      let sum = 0;
+    return this.reportService.calculateLastWeek(
+      this.sortedById,
       this.sortedByCreatedAt
-        .filter(a => {
-          const isOutcome = categories.find(
-            c => a.getCategoryId() === c.getId()
-          );
-          const isUnderInterval =
-            a.getCreatedAt() < endOfNow && a.getCreatedAt() > startOfNow;
-
-          return isOutcome && isOutcome.getType() && isUnderInterval;
-        })
-        .forEach(a => {
-          sum += a.getSum();
-        });
-      result.push(sum);
-      startOfNow = new Date(startOfNow).setDate(
-        new Date(startOfNow).getDate() - 1
-      );
-      endOfNow = new Date(endOfNow).setDate(new Date(endOfNow).getDate() - 1);
-    });
-
-    return result.reverse();
+    );
   }
 
   get dailyBudget(): number {
-    return this.calculateSumByDayCount(1);
+    return this.reportService.calculateSumByDayCount(
+      this.sortedById,
+      this.sortedByCreatedAt,
+      1
+    );
   }
 
   get weeklyBudget(): number {
-    return this.calculateSumByDayCount(7);
+    return this.reportService.calculateSumByDayCount(
+      this.sortedById,
+      this.sortedByCreatedAt,
+      7
+    );
   }
 
   get monthlyBudget(): number {
-    return this.calculateSumByDayCount(31);
-  }
-
-  private calculateSumByDayCount(daysCount: number): number {
-    let startOfNow = new Date().setHours(0, 0, 0, 0);
-    let endOfNow = new Date().setHours(23, 59, 59, 59);
-
-    const categories = this.sortedById;
-
-    let result = 0;
-
-    [...Array(daysCount).keys()].forEach(() => {
-      this.sortedByCreatedAt
-        .filter(a => {
-          const isOutcome = categories.find(
-            c => a.getCategoryId() === c.getId()
-          );
-          const isUnderInterval =
-            a.getCreatedAt() < endOfNow && a.getCreatedAt() > startOfNow;
-
-          return isOutcome && isOutcome.getType() && isUnderInterval;
-        })
-        .forEach(a => {
-          result += a.getSum();
-        });
-      startOfNow = new Date(startOfNow).setDate(
-        new Date(startOfNow).getDate() - 1
-      );
-      endOfNow = new Date(endOfNow).setDate(new Date(endOfNow).getDate() - 1);
-    });
-
-    return result;
+    return this.reportService.calculateSumByDayCount(
+      this.sortedById,
+      this.sortedByCreatedAt,
+      31
+    );
   }
 }
 </script>
