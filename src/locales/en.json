@@ -28,7 +28,8 @@
     "settings": {
         "update": "Update app",
         "about": "About",
-        "profile": "Profile"
+        "profile": "Profile",
+        "cloud": "Finplan cloud"
     },
     "about": {
         "control-finances": "Control your finances"
@@ -46,5 +47,30 @@
         "incomes": "Incomes",
         "outcomes": "Outcomes",
         "by-categories": "By categories"
+    },
+    "cloud": {
+        "index": {
+            "login": "Login",
+            "logout": "Logout",
+            "download": "Download",
+            "upload": "Upload",
+            "downloaded": "Downloaded successfuly",
+            "uploaded": "Uploaded successfuly"
+        },
+        "login": {
+            "login": "Login",
+            "password": "Password",
+            "password-hint": "At least 6 characters",
+            "validation": {
+                "email": {
+                    "required": "E-mail is required",
+                    "valid": "E-mail must be valid"
+                },
+                "password": {
+                    "required": "Password is required",
+                    "length": "Password must be more than 5 characters"
+                }
+            }
+        }
     }
 }

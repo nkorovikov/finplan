@@ -47,6 +47,16 @@ export default class CategoriesCategories extends VuexModule {
         this.categories.splice(index, 1);
     }
 
+    @Mutation
+    public saveAll(expenses: Array<Category>): void {
+        this.categories = expenses;
+    }
+
+    @Mutation
+    public clearAll(): void {
+        this.categories = [];
+    }
+
     @Action
     public createCategory(category: Category): void {
         this.context.commit('push', category)
@@ -68,5 +78,12 @@ export default class CategoriesCategories extends VuexModule {
     @Action
     findById(id: number): Category | undefined {
         return this.categories.find((category: Category) => category.getId() === id);
+    }
+
+    @Action
+    public replaceAllCategories(categories: Array<Category>): void {
+        this.context.commit('clearAll', categories);
+        this.context.commit('saveAll', categories);
+        storage.syncCategories(this.categories);
     }
 }

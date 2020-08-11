@@ -50,6 +50,11 @@ export default class Settings extends Vue {
       to: "Profile",
       icon: "mdi-account",
       titleSlug: "settings.profile"
+    },
+    {
+      to: "FinplanCloud",
+      icon: "mdi-image-filter-drama",
+      titleSlug: "settings.cloud"
     }
   ];
 

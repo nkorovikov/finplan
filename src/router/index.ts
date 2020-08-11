@@ -50,6 +50,16 @@ const routes: Array<RouteConfig> = [
     name: 'Profile',
     component: () => import('../views/Profile.vue'),
   },
+  {
+    path: '/cloud',
+    name: 'FinplanCloud',
+    component: () => import('../views/FinplanCloud/Index.vue'),
+  },
+  {
+    path: '/cloud/login',
+    name: 'Login',
+    component: () => import('../views/FinplanCloud/Login.vue'),
+  },
 ];
 
 const router = new VueRouter({
