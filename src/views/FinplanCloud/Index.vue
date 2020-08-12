@@ -6,7 +6,7 @@
     }" />
     <v-card dark class="mx-auto" v-if="!noInternet">
       <v-card-title>Finplan Cloud</v-card-title>
-
+      <v-card-subtitle>{{ getCloud.email }}</v-card-subtitle>
       <v-card-actions v-if="!isAuth">
         <v-btn :to="{name: 'Login'}" text>{{ $t('cloud.index.login') }}</v-btn>
       </v-card-actions>
@@ -41,10 +41,12 @@ import { namespace } from "vuex-class";
 import Expense from "@/models/Expense";
 import Category from "@/models/Category";
 import Profile from "@/models/Profile";
+import Cloud from "@/models/Cloud";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 const profile = namespace("Profile");
+const cloud = namespace("Cloud");
 
 @Component({
   components: {
@@ -52,13 +54,11 @@ const profile = namespace("Profile");
   }
 })
 export default class Index extends Vue {
-  private token = "";
   private snackbar = false;
   private snackbarText = "";
   private noInternet = true;
 
   public async mounted() {
-    this.token = localStorage.getItem("token") ?? "";
     this.noInternet = !navigator.onLine;
   }
 
@@ -67,6 +67,12 @@ export default class Index extends Vue {
 
   @categories.Getter
   public sortedById!: Array<Category>;
+
+  @cloud.Getter
+  public getCloud!: Cloud;
+
+  @cloud.Action
+  saveCloud!: (cloud: Cloud) => void;
 
   @profile.Action
   get!: () => Profile;
@@ -81,19 +87,18 @@ export default class Index extends Vue {
   replaceAllCategories!: (categories: Array<Category>) => void;
 
   get isAuth() {
-    return this.token.length > 0;
+    return this.getCloud.getToken().length > 0;
   }
 
   public logout() {
-    this.token = "";
-    localStorage.setItem("token", "");
+    this.saveCloud(new Cloud("", ""));
   }
 
   public async upload() {
     const profile = await this.get();
 
     const config = {
-      headers: { Authorization: this.token }
+      headers: { Authorization: this.getCloud.getToken() }
     };
 
     try {
@@ -103,7 +108,12 @@ export default class Index extends Vue {
         config
       );
     } catch (e) {
-      console.log(e);
+      if (e.response.status === 401) {
+        this.saveCloud(new Cloud("", ""));
+        this.snackbarText = "cloud.index.unauthorized";
+        this.snackbar = true;
+        return;
+      }
     }
 
     try {
@@ -132,7 +142,7 @@ export default class Index extends Vue {
 
   public async download() {
     const config = {
-      headers: { Authorization: this.token }
+      headers: { Authorization: this.getCloud.getToken() }
     };
 
     try {

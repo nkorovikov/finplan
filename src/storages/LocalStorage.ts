@@ -1,6 +1,7 @@
 import Expense from '@/models/Expense';
 import Category from '@/models/Category';
 import Profile from '@/models/Profile';
+import Cloud from '@/models/Cloud';
 
 export default class LocalStorage {
     public getExpenses(): Array<Expense> {
@@ -59,5 +60,23 @@ export default class LocalStorage {
 
     syncProfile(profile: Profile): void {
         localStorage.setItem("profile", JSON.stringify(profile));
+    }
+
+    getCloud(): Cloud {
+        if (!localStorage.cloud) {
+            return new Cloud(
+                '',
+                ''
+            );
+        }
+        const cloud: any = JSON.parse(localStorage.cloud)
+        return new Cloud(
+            cloud.email,
+            cloud.token
+        );
+    }
+
+    syncCloud(cloud: Cloud): void {
+        localStorage.setItem("cloud", JSON.stringify(cloud));
     }
 }

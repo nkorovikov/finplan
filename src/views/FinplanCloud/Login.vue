@@ -28,6 +28,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/navbar/NavBar.vue";
 import i18n from "../../i18n";
+import { namespace } from "vuex-class";
+import Cloud from "@/models/Cloud";
+
+const cloud = namespace("Cloud");
 
 @Component({
   components: {
@@ -47,7 +51,11 @@ export default class Login extends Vue {
     (v: any) => !!v || i18n.t("cloud.login.validation.password.required"),
     (v: any) => v.length > 5 || i18n.t("cloud.login.validation.password.length")
   ];
+
   private valid = false;
+
+  @cloud.Action
+  saveCloud!: (cloud: Cloud) => void;
 
   public async send() {
     if (!this.valid) {
@@ -62,7 +70,10 @@ export default class Login extends Vue {
         }
       );
       const token = response.data.token;
-      localStorage.setItem("token", token);
+
+      const cloud = new Cloud(this.email, token);
+      this.saveCloud(cloud);
+
       this.$router.push({ name: "FinplanCloud" });
     } catch (e) {
       console.log(e);

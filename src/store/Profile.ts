@@ -5,7 +5,7 @@ import LocalStorage from '@/storages/LocalStorage'
 const storage: LocalStorage = new LocalStorage()
 
 @Module({ namespaced: true })
-export default class Expenses extends VuexModule {
+export default class ProfileStorage extends VuexModule {
     public profile: Profile = storage.getProfile()
 
     @Mutation
