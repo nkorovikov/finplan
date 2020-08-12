@@ -14,8 +14,7 @@
       :weekly-budget="weeklyBudget"
       :monthly-budget="monthlyBudget"
     />
-    <br />
-
+    
     <by-categories />
     <br />
 
