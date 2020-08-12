@@ -148,6 +148,7 @@ export default class Index extends Vue {
         response.data.profile.locale
       );
       this.saveProfile(profile);
+      this.$i18n.locale = profile.getLocale();
     } catch (e) {
       console.log(e);
     }
