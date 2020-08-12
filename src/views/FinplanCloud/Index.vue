@@ -4,7 +4,7 @@
       show: true,
       to: 'Settings'
     }" />
-    <v-card dark class="mx-auto" max-width="344">
+    <v-card dark class="mx-auto" v-if="!noInternet">
       <v-card-title>Finplan Cloud</v-card-title>
 
       <v-card-actions v-if="!isAuth">
@@ -26,6 +26,9 @@
           </v-card-actions>
         </div>
       </v-expand-transition>
+    </v-card>
+    <v-card dark class="mx-auto" v-else>
+      <v-card-title>No internet</v-card-title>
     </v-card>
     <v-snackbar v-model="snackbar" :timeout="1000">{{ $t(snackbarText) }}!</v-snackbar>
   </div>
@@ -52,9 +55,11 @@ export default class Index extends Vue {
   private token = "";
   private snackbar = false;
   private snackbarText = "";
+  private noInternet = true;
 
-  public mounted() {
+  public async mounted() {
     this.token = localStorage.getItem("token") ?? "";
+    this.noInternet = !navigator.onLine;
   }
 
   @expenses.Getter
