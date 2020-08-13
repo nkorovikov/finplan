@@ -4,7 +4,7 @@
       show: true,
       to: 'Settings'
     }" />
-    <v-card max-width="344" class="mx-auto">
+    <v-card class="mx-auto">
       <v-list-item>
         <v-list-item-avatar color="grey">
           <v-img :src="'/finplan/img/icons/android-chrome-192x192.png'"></v-img>
@@ -25,6 +25,10 @@
           <v-icon to>mdi-instagram</v-icon>
         </v-btn>
       </v-card-actions>
+    </v-card>
+    <br>
+    <v-card class="mx-auto">
+       <v-card-text>{{ $t('about.add-to-homescreen-hint') }}</v-card-text>
     </v-card>
   </div>
 </template>
