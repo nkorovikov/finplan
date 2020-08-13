@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <public-layout>
-          <router-view />
+        <router-view />
       </public-layout>
     </v-app>
   </div>
@@ -22,4 +22,8 @@ export default class App extends Vue {}
 
 <style lang="scss">
 @import "~material-design-icons/iconfont/material-icons.css";
+
+body {
+  overscroll-behavior-y: contain;
+}
 </style>
