@@ -14,7 +14,7 @@
       :weekly-budget="weeklyBudget"
       :monthly-budget="monthlyBudget"
     />
-    
+
     <by-categories />
     <br />
 
@@ -70,18 +70,16 @@ export default class Report extends Vue {
   }
 
   get weeklyBudget(): number {
-    return this.reportService.calculateSumByDayCount(
+    return this.reportService.calculateSumByCurrentWeek(
       this.sortedById,
-      this.sortedByCreatedAt,
-      7
+      this.sortedByCreatedAt
     );
   }
 
   get monthlyBudget(): number {
-    return this.reportService.calculateSumByDayCount(
+    return this.reportService.calculateSumByCurrentMonth(
       this.sortedById,
-      this.sortedByCreatedAt,
-      31
+      this.sortedByCreatedAt
     );
   }
 }

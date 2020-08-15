@@ -135,7 +135,11 @@ export default class Home extends Vue {
         lastId + 1,
         numSum,
         categoryId,
-        new Date(this.createdAt).getTime()
+        new Date(
+          new Date(this.createdAt).toLocaleString("en-EN", {
+            timeZone: "UTC"
+          })
+        ).getTime()
       )
     );
 
