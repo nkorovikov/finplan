@@ -18,9 +18,22 @@
       min-width="290px"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-text-field v-model="createdAt" prepend-icon="event" readonly v-bind="attrs" v-on="on"></v-text-field>
+        <v-text-field
+          color="#00E5FF"
+          v-model="createdAt"
+          prepend-icon="event"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
       </template>
-      <v-date-picker v-model="createdAt" @input="menu = false"></v-date-picker>
+      <v-date-picker
+        first-day-of-week="1"
+        dark
+        color="#00E5FF"
+        v-model="createdAt"
+        @input="menu = false"
+      ></v-date-picker>
     </v-menu>
     <v-container v-if="thereAreNoCategories">
       {{ $t('home.no-categories') }}.
@@ -67,7 +80,11 @@ const categories = namespace("Categories");
 export default class Home extends Vue {
   private sum = "";
   private icon = "mdi-minus";
-  private createdAt = new Date().toISOString().substr(0, 10);
+  private createdAt = new Date(
+    new Date().toLocaleString("en-EN", { timeZone: "Europe/Moscow" })
+  )
+    .toISOString()
+    .substr(0, 10);
   private menu = false;
   private snackbar = false;
 
@@ -118,7 +135,7 @@ export default class Home extends Vue {
         lastId + 1,
         numSum,
         categoryId,
-        new Date(this.createdAt).getTime() // saving in GMT
+        new Date(this.createdAt).getTime()
       )
     );
 
