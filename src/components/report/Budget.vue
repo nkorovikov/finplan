@@ -19,7 +19,6 @@
         :progressTitle="$t('profile.month-budget')"
       />
     </v-card>
-    <br />
   </div>
 </template>
 

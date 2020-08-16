@@ -150,8 +150,10 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.overflower-categories {
-  height: 350px;
-  overflow-y: scroll;
+@media (max-width: 425px) {
+  .overflower-categories {
+    height: 350px;
+    overflow-y: scroll;
+  }
 }
 </style>

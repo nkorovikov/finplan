@@ -1,29 +1,28 @@
 <template>
-  <div>
-    <v-tabs centered grow>
-      <v-tab>{{ $t('report.outcomes') }}</v-tab>
-      <v-tab disabled>{{ $t('report.incomes') }}</v-tab>
-    </v-tabs>
-    <br />
-
-    <last-week-graph :data="lastWeek" />
-    <br />
-
-    <budget
-      :daily-budget="dailyBudget"
-      :weekly-budget="weeklyBudget"
-      :monthly-budget="monthlyBudget"
-    />
-
-    <by-categories />
-    <br />
-
-    <v-btn outlined block :to="{ name: 'History'}">
-      <v-icon>mdi-history</v-icon>
-      <v-spacer />
-      {{ $t('menu.history') }}
-    </v-btn>
-  </div>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" md="6" lg="4">
+        <last-week-graph :data="lastWeek" />
+      </v-col>
+      <v-col cols="12" md="6" lg="4">
+        <budget
+          :daily-budget="dailyBudget"
+          :weekly-budget="weeklyBudget"
+          :monthly-budget="monthlyBudget"
+        />
+      </v-col>
+      <v-col cols="12" md="6" lg="4">
+        <by-categories />
+      </v-col>
+      <v-col cols="12" md="6" lg="4">
+        <v-btn outlined block :to="{ name: 'History'}">
+          <v-icon>mdi-history</v-icon>
+          <v-spacer />
+          {{ $t('menu.history') }}
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
