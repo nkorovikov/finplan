@@ -164,7 +164,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/finplan/robots.txt"
   },
   {
-    "revision": "17c635356e1bc9013414d393bf0558a0",
+    "revision": "b26ac4a971623b955e7d00a92a613a89",
     "url": "/finplan/site.webmanifest"
   }
 ]);
