@@ -2,6 +2,12 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12" md="6" lg="4">
+        <v-btn outlined block :to="{ name: 'History'}">
+          <v-icon>mdi-history</v-icon>
+          <v-spacer />
+          {{ $t('menu.history') }}
+        </v-btn>
+        <br />
         <last-week-graph :data="lastWeek" />
       </v-col>
       <v-col cols="12" md="6" lg="4">
@@ -11,15 +17,8 @@
           :monthly-budget="monthlyBudget"
         />
       </v-col>
-      <v-col cols="12" md="6" lg="4">
+      <v-col cols="12" md="12" lg="4">
         <by-categories />
-      </v-col>
-      <v-col cols="12" md="6" lg="4">
-        <v-btn outlined block :to="{ name: 'History'}">
-          <v-icon>mdi-history</v-icon>
-          <v-spacer />
-          {{ $t('menu.history') }}
-        </v-btn>
       </v-col>
     </v-row>
   </v-container>
