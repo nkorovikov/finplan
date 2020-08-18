@@ -1,7 +1,7 @@
 {
     "name": "Finplan",
     "short_name": "Finplan",
-    "start_url": "",
+    "start_url": "/finplan/",
     "icons": [
         {
             "src": "img/icons/android-chrome-192x192.png",
