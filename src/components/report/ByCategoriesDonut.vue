@@ -1,23 +1,21 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from "vue-property-decorator";
-import { Doughnut } from "vue-chartjs";
+import { Doughnut, mixins } from "vue-chartjs";
 
 @Component({
   components: {}
 })
-export default class ByCategories extends Mixins(Doughnut) {
-  @Prop({
-    default: (): any => null
-  })
-  readonly chartdata!: any;
-
+export default class ByCategories extends Mixins(
+  Doughnut,
+  mixins.reactiveProp
+) {
   @Prop({
     default: (): any => null
   })
   readonly options!: any;
 
-  mounted () {
-    this.renderChart(this.chartdata, this.options)
+  mounted() {
+    this.renderChart(this.chartData, this.options);
   }
 }
 </script>
