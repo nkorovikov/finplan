@@ -80,11 +80,7 @@ const categories = namespace("Categories");
 export default class Home extends Vue {
   private sum = "";
   private icon = "mdi-minus";
-  private createdAt = new Date(
-    new Date().toLocaleString("en-EN", { timeZone: "Europe/Moscow" })
-  )
-    .toISOString()
-    .substr(0, 10);
+  private createdAt = new Date().getFullYear() + (new Date().getMonth() + 1 > 10 ? '-' : '-0') + (new Date().getMonth() + 1) + '-' + new Date().getDate();
   private menu = false;
   private snackbar = false;
 
