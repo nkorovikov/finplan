@@ -1,9 +1,11 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'Home'
-    }" />
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'Home',
+      }"
+    />
     <v-card>
       <v-list dense nav>
         <v-list-item @click.prevent="reload">
@@ -12,11 +14,15 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('settings.update') }}</v-list-item-title>
+            <v-list-item-title>{{ $t("settings.update") }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item v-for="setting in settings" :to="{name: setting.to}" :key="setting.to">
+        <v-list-item
+          v-for="setting in settings"
+          :to="{ name: setting.to }"
+          :key="setting.to"
+        >
           <v-list-item-icon>
             <v-icon>{{ setting.icon }}</v-icon>
           </v-list-item-icon>
@@ -36,26 +42,26 @@ import NavBar from "@/components/navbar/NavBar.vue";
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+  },
 })
 export default class Settings extends Vue {
   private settings = [
     {
       to: "About",
       icon: "mdi-information-outline",
-      titleSlug: "settings.about"
+      titleSlug: "settings.about",
     },
     {
       to: "Profile",
       icon: "mdi-account",
-      titleSlug: "settings.profile"
+      titleSlug: "settings.profile",
     },
     {
       to: "FinplanCloud",
       icon: "mdi-image-filter-drama",
-      titleSlug: "settings.cloud"
-    }
+      titleSlug: "settings.cloud",
+    },
   ];
 
   public reload() {

@@ -1,11 +1,18 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'FinplanCloud'
-    }" />
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'FinplanCloud',
+      }"
+    />
     <v-form v-model="valid">
-      <v-text-field label="Email" outlined v-model.trim="email" :rules="emailRules" />
+      <v-text-field
+        label="Email"
+        outlined
+        v-model.trim="email"
+        :rules="emailRules"
+      />
       <v-text-field
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPassword ? 'text' : 'password'"
@@ -18,7 +25,9 @@
         v-model.trim="password"
       />
       <div>
-        <v-btn outlined @click.prevent="send">{{ $t('cloud.login.login') }}</v-btn>
+        <v-btn outlined @click.prevent="send">{{
+          $t("cloud.login.login")
+        }}</v-btn>
       </div>
     </v-form>
   </div>
@@ -35,21 +44,22 @@ const cloud = namespace("Cloud");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+  },
 })
 export default class Login extends Vue {
   private email = "";
   private password = "";
   private showPassword = false;
   private emailRules = [
-    (v: any) => !!v || i18n.t("cloud.login.validation.email.required"),
-    (v: any) => /.+@.+/.test(v) || i18n.t("cloud.login.validation.email.valid")
+    (v: string) => !!v || i18n.t("cloud.login.validation.email.required"),
+    (v: string) => /.+@.+/.test(v) || i18n.t("cloud.login.validation.email.valid"),
   ];
 
   private passwordRules = [
-    (v: any) => !!v || i18n.t("cloud.login.validation.password.required"),
-    (v: any) => v.length > 5 || i18n.t("cloud.login.validation.password.length")
+    (v: string) => !!v || i18n.t("cloud.login.validation.password.required"),
+    (v: string) =>
+      v.length > 5 || i18n.t("cloud.login.validation.password.length"),
   ];
 
   private valid = false;
@@ -66,7 +76,7 @@ export default class Login extends Vue {
         "https://finplan-env-production.herokuapp.com/api/login",
         {
           email: this.email,
-          password: this.password
+          password: this.password,
         }
       );
       const token = response.data.token;

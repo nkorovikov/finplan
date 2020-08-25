@@ -66,5 +66,13 @@ export default [
     {
         text: "<i class='material-icons'>fitness_center</i>",
         value: "fitness_center"
+    },
+    {
+        text: "<i class='material-icons'>local_hospital</i>",
+        value: "local_hospital"
+    },
+    {
+        text: "<i class='material-icons'>content_cut</i>",
+        value: "content_cut"
     }
 ];

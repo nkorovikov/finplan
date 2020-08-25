@@ -1,6 +1,6 @@
 <template>
   <v-card color="#00E5FF" dark class="pl-2 pt-1 pr-2">
-    <h3>{{ $t('history.last-week-outcomes') }}</h3>
+    <h3>{{ $t("history.last-week-outcomes") }}</h3>
     <v-sparkline
       :value="data"
       color="white"
@@ -15,16 +15,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class History extends Vue {
   private lineWidth = 2;
   private lineCap = "round";
   private type = "trend";
 
-  @Prop() readonly data!: Array<any>;
+  @Prop() readonly data!: Array<number>;
 }
 </script>

@@ -1,17 +1,23 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'Settings'
-    }" />
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'Settings',
+      }"
+    />
     <v-card dark class="mx-auto" v-if="!noInternet">
       <v-card-title>Finplan Cloud</v-card-title>
       <v-card-subtitle>{{ getCloud.email }}</v-card-subtitle>
       <v-card-actions v-if="!isAuth">
-        <v-btn :to="{name: 'Login'}" text>{{ $t('cloud.index.login') }}</v-btn>
+        <v-btn :to="{ name: 'Login' }" text>{{
+          $t("cloud.index.login")
+        }}</v-btn>
       </v-card-actions>
       <v-card-actions v-else>
-        <v-btn @click.prevent="logout" text>{{ $t('cloud.index.logout') }}</v-btn>
+        <v-btn @click.prevent="logout" text>{{
+          $t("cloud.index.logout")
+        }}</v-btn>
       </v-card-actions>
 
       <v-expand-transition>
@@ -19,10 +25,14 @@
           <v-divider></v-divider>
 
           <v-card-actions>
-            <v-btn @click.prevent="download" text>{{ $t('cloud.index.download') }}</v-btn>
+            <v-btn @click.prevent="download" text>{{
+              $t("cloud.index.download")
+            }}</v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn @click.prevent="upload" text>{{ $t('cloud.index.upload') }}</v-btn>
+            <v-btn @click.prevent="upload" text>{{
+              $t("cloud.index.upload")
+            }}</v-btn>
           </v-card-actions>
         </div>
       </v-expand-transition>
@@ -30,7 +40,9 @@
     <v-card dark class="mx-auto" v-else>
       <v-card-title>No internet</v-card-title>
     </v-card>
-    <v-snackbar v-model="snackbar" :timeout="1000">{{ $t(snackbarText) }}!</v-snackbar>
+    <v-snackbar v-model="snackbar" :timeout="1000"
+      >{{ $t(snackbarText) }}!</v-snackbar
+    >
   </div>
 </template>
 
@@ -42,6 +54,8 @@ import Expense from "@/models/Expense";
 import Category from "@/models/Category";
 import Profile from "@/models/Profile";
 import Cloud from "@/models/Cloud";
+import ICategory from "@/models/ICategory";
+import IExpense from "@/models/IExpense";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
@@ -50,8 +64,8 @@ const cloud = namespace("Cloud");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+  },
 })
 export default class Index extends Vue {
   private snackbar = false;
@@ -98,11 +112,11 @@ export default class Index extends Vue {
     const profile = await this.get();
 
     const config = {
-      headers: { Authorization: this.getCloud.getToken() }
+      headers: { Authorization: this.getCloud.getToken() },
     };
 
     try {
-      const response = await this.$axios.post(
+      await this.$axios.post(
         "https://finplan-env-production.herokuapp.com/api/profile",
         profile,
         config
@@ -117,7 +131,7 @@ export default class Index extends Vue {
     }
 
     try {
-      const response = await this.$axios.post(
+      await this.$axios.post(
         "https://finplan-env-production.herokuapp.com/api/categories",
         this.sortedById,
         config
@@ -127,7 +141,7 @@ export default class Index extends Vue {
     }
 
     try {
-      const response = await this.$axios.post(
+      await this.$axios.post(
         "https://finplan-env-production.herokuapp.com/api/expenses",
         this.sortedByCreatedAt,
         config
@@ -142,7 +156,7 @@ export default class Index extends Vue {
 
   public async download() {
     const config = {
-      headers: { Authorization: this.getCloud.getToken() }
+      headers: { Authorization: this.getCloud.getToken() },
     };
 
     try {
@@ -169,7 +183,7 @@ export default class Index extends Vue {
         config
       );
       const categories = response.data.categories.map(
-        (category: any) =>
+        (category: ICategory) =>
           new Category(category.id, category.name, category.type, category.icon)
       );
       this.replaceAllCategories(categories);
@@ -183,7 +197,7 @@ export default class Index extends Vue {
         config
       );
       const expenses = response.data.expenses.map(
-        (expense: any) =>
+        (expense: IExpense) =>
           new Expense(
             expense.id,
             expense.sum,

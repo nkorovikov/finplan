@@ -14,8 +14,8 @@ import PublicLayout from "./layouts/PublicLayout.vue";
 
 @Component({
   components: {
-    PublicLayout
-  }
+    PublicLayout,
+  },
 })
 export default class App extends Vue {}
 </script>
