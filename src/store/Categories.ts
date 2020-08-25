@@ -10,11 +10,11 @@ export default class CategoriesCategories extends VuexModule {
 
     get sortedById(): Array<Category> {
         return [...this.categories].sort((a: Category, b: Category): number => {
-            if (a.getId === b.getId) {
+            if (a.getId() === b.getId()) {
                 return 0
             }
 
-            if (a.getId > b.getId) {
+            if (a.getId() > b.getId()) {
                 return -1
             }
 
