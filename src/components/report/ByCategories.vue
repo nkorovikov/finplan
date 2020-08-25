@@ -53,12 +53,30 @@ import Category from "@/models/Category";
 import IChartOption from "@/library/interfaces/IChartOption";
 import IChartData from "@/library/interfaces/IChartData";
 import ReportService from "@/services/ReportService";
+import {
+  VCard,
+  VMenu,
+  VTextField,
+  VDatePicker,
+  VSpacer,
+  VBtn,
+  VContainer,
+} from "vuetify/lib";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: { ByCategoriesDonut },
+  components: {
+    ByCategoriesDonut,
+    VCard,
+    VMenu,
+    VTextField,
+    VDatePicker,
+    VSpacer,
+    VBtn,
+    VContainer,
+  },
 })
 export default class ByCategories extends Vue {
   private reportService = new ReportService();

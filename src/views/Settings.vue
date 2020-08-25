@@ -39,10 +39,26 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/navbar/NavBar.vue";
+import {
+  VCard,
+  VList,
+  VListItem,
+  VListItemIcon,
+  VListItemContent,
+  VListItemTitle,
+  VIcon,
+} from "vuetify/lib";
 
 @Component({
   components: {
     NavBar,
+    VCard,
+    VList,
+    VListItem,
+    VListItemIcon,
+    VListItemContent,
+    VListItemTitle,
+    VIcon,
   },
 })
 export default class Settings extends Vue {

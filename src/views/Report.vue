@@ -2,10 +2,10 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12" md="6" lg="4">
-        <v-btn outlined block :to="{ name: 'History'}">
+        <v-btn outlined block :to="{ name: 'History' }">
           <v-icon>mdi-history</v-icon>
           <v-spacer />
-          {{ $t('menu.history') }}
+          {{ $t("menu.history") }}
         </v-btn>
         <br />
         <last-week-graph :data="lastWeek" />
@@ -33,12 +33,23 @@ import LastWeekGraph from "../components/report/LastWeekGraph.vue";
 import Budget from "../components/report/Budget.vue";
 import ByCategories from "../components/report/ByCategories.vue";
 import ReportService from "@/services/ReportService";
+import { VContainer, VRow, VCol, VBtn, VIcon, VSpacer } from "vuetify/lib";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
-  components: { LastWeekGraph, Budget, ByCategories }
+  components: {
+    LastWeekGraph,
+    Budget,
+    ByCategories,
+    VContainer,
+    VRow,
+    VCol,
+    VBtn,
+    VIcon,
+    VSpacer,
+  },
 })
 export default class Report extends Vue {
   private reportService = new ReportService();

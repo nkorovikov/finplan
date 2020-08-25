@@ -1,15 +1,26 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'Categories'
-    }" />
-    <v-text-field :label="$t('categories.title')" outlined v-model.trim="category.name" />
-    <v-select v-model="category.icon" :items="icons" :label="$t('categories.icon')" outlined>
-      <template v-slot:item="{item}">
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'Categories',
+      }"
+    />
+    <v-text-field
+      :label="$t('categories.title')"
+      outlined
+      v-model.trim="category.name"
+    />
+    <v-select
+      v-model="category.icon"
+      :items="icons"
+      :label="$t('categories.icon')"
+      outlined
+    >
+      <template v-slot:item="{ item }">
         <div v-html="item.text" />
       </template>
-      <template v-slot:selection="{item}">
+      <template v-slot:selection="{ item }">
         <div v-html="item.text" />
       </template>
     </v-select>
@@ -18,7 +29,9 @@
       <v-radio :label="$t('categories.outcome')" :value="2"></v-radio>
     </v-radio-group>
     <div>
-      <v-btn outlined @click.prevent="saveCategoryHandler">{{ $t('categories.save') }}</v-btn>
+      <v-btn outlined @click.prevent="saveCategoryHandler">{{
+        $t("categories.save")
+      }}</v-btn>
     </div>
   </div>
 </template>
@@ -30,13 +43,19 @@ import Category from "../models/Category";
 import CategoryIcons from "../sets/CategoryIcons";
 import CategorySelectTypes from "../sets/CategorySelectTypes";
 import NavBar from "@/components/navbar/NavBar.vue";
+import { VTextField, VSelect, VRadioGroup, VRadio, VBtn } from "vuetify/lib";
 
 const categories = namespace("Categories");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+    VTextField,
+    VSelect,
+    VRadioGroup,
+    VRadio,
+    VBtn,
+  },
 })
 export default class CategoriesUpdate extends Vue {
   private category: Category = new Category(0, "", 1, "");

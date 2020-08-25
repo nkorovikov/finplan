@@ -1,10 +1,16 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'Settings'
-    }" />
-    <v-text-field :label="$t('profile.name')" outlined v-model.trim="profile.name" />
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'Settings',
+      }"
+    />
+    <v-text-field
+      :label="$t('profile.name')"
+      outlined
+      v-model.trim="profile.name"
+    />
     <v-text-field
       :label="$t('profile.daily-budget')"
       outlined
@@ -28,9 +34,13 @@
       <v-radio label="English" value="en"></v-radio>
     </v-radio-group>
     <div>
-      <v-btn outlined @click.prevent="saveProfileHandler">{{ $t('profile.save') }}</v-btn>
+      <v-btn outlined @click.prevent="saveProfileHandler">{{
+        $t("profile.save")
+      }}</v-btn>
     </div>
-    <v-snackbar v-model="snackbar" :timeout="1000">{{ $t('profile.saved') }}!</v-snackbar>
+    <v-snackbar v-model="snackbar" :timeout="1000"
+      >{{ $t("profile.saved") }}!</v-snackbar
+    >
   </div>
 </template>
 
@@ -39,13 +49,19 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import ProfileModel from "../models/Profile";
 import NavBar from "@/components/navbar/NavBar.vue";
+import { VTextField, VRadioGroup, VRadio, VBtn, VSnackbar } from "vuetify/lib";
 
 const profile = namespace("Profile");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+    VTextField,
+    VRadioGroup,
+    VRadio,
+    VSnackbar,
+    VBtn,
+  },
 })
 export default class Profile extends Vue {
   private profile: ProfileModel = new ProfileModel("", 0, 0, 0, "ru");

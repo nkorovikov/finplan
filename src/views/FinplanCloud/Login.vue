@@ -39,12 +39,16 @@ import NavBar from "@/components/navbar/NavBar.vue";
 import i18n from "../../i18n";
 import { namespace } from "vuex-class";
 import Cloud from "@/models/Cloud";
+import { VTextField, VForm, VBtn } from "vuetify/lib";
 
 const cloud = namespace("Cloud");
 
 @Component({
   components: {
     NavBar,
+    VTextField,
+    VForm,
+    VBtn,
   },
 })
 export default class Login extends Vue {
@@ -53,7 +57,8 @@ export default class Login extends Vue {
   private showPassword = false;
   private emailRules = [
     (v: string) => !!v || i18n.t("cloud.login.validation.email.required"),
-    (v: string) => /.+@.+/.test(v) || i18n.t("cloud.login.validation.email.valid"),
+    (v: string) =>
+      /.+@.+/.test(v) || i18n.t("cloud.login.validation.email.valid"),
   ];
 
   private passwordRules = [

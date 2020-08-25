@@ -56,6 +56,16 @@ import Profile from "@/models/Profile";
 import Cloud from "@/models/Cloud";
 import ICategory from "@/models/ICategory";
 import IExpense from "@/models/IExpense";
+import {
+  VCard,
+  VCardTitle,
+  VCardSubtitle,
+  VCardActions,
+  VExpandTransition,
+  VDivider,
+  VBtn,
+  VSnackbar,
+} from "vuetify/lib";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
@@ -65,6 +75,14 @@ const cloud = namespace("Cloud");
 @Component({
   components: {
     NavBar,
+    VCard,
+    VCardTitle,
+    VCardSubtitle,
+    VCardActions,
+    VExpandTransition,
+    VDivider,
+    VBtn,
+    VSnackbar,
   },
 })
 export default class Index extends Vue {

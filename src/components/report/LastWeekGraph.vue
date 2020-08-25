@@ -16,9 +16,10 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
+import { VCard, VSparkline } from "vuetify/lib";
 
 @Component({
-  components: {},
+  components: { VCard, VSparkline },
 })
 export default class History extends Vue {
   private lineWidth = 2;

@@ -36,13 +36,15 @@
       ></v-date-picker>
     </v-menu>
     <v-container v-if="thereAreNoCategories">
-      {{ $t('home.no-categories') }}.
-      <router-link tag="a" :to="{name: 'CategoriesCreate'}">{{ $t('home.create') }}</router-link>
+      {{ $t("home.no-categories") }}.
+      <router-link tag="a" :to="{ name: 'CategoriesCreate' }">{{
+        $t("home.create")
+      }}</router-link>
     </v-container>
     <v-container v-else class="overflower-categories">
-      <v-row v-for="(i) in Math.ceil(categories.length / 2)" :key="i" no-gutters>
+      <v-row v-for="i in Math.ceil(categories.length / 2)" :key="i" no-gutters>
         <v-col
-          v-for="(category) in categories.slice((i - 1) * 2, (i - 1) * 2 + 2)"
+          v-for="category in categories.slice((i - 1) * 2, (i - 1) * 2 + 2)"
           :key="category.id"
           @click.prevent="saveExpenseHandler(category.id)"
         >
@@ -57,8 +59,12 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-btn outlined block :to="{ name: 'Categories'}">{{ $t('home.categories') }}</v-btn>
-    <v-snackbar v-model="snackbar" :timeout="1000">{{ $t('home.added') }}!</v-snackbar>
+    <v-btn outlined block :to="{ name: 'Categories' }">{{
+      $t("home.categories")
+    }}</v-btn>
+    <v-snackbar v-model="snackbar" :timeout="1000"
+      >{{ $t("home.added") }}!</v-snackbar
+    >
   </div>
 </template>
 
@@ -68,19 +74,44 @@ import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
 import Category from "../models/Category";
 import NavBar from "@/components/navbar/NavBar.vue";
+import {
+  VTextField,
+  VMenu,
+  VDatePicker,
+  VContainer,
+  VRow,
+  VCol,
+  VCard,
+  VBtn,
+  VSnackbar,
+} from "vuetify/lib";
 
 const expenses = namespace("Expenses");
 const categories = namespace("Categories");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+    VTextField,
+    VMenu,
+    VDatePicker,
+    VContainer,
+    VRow,
+    VCol,
+    VCard,
+    VBtn,
+    VSnackbar,
+  },
 })
 export default class Home extends Vue {
   private sum = "";
   private icon = "mdi-minus";
-  private createdAt = new Date().getFullYear() + (new Date().getMonth() + 1 > 10 ? '-' : '-0') + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+  private createdAt =
+    new Date().getFullYear() +
+    (new Date().getMonth() + 1 > 10 ? "-" : "-0") +
+    (new Date().getMonth() + 1) +
+    "-" +
+    new Date().getDate();
   private menu = false;
   private snackbar = false;
 
@@ -133,7 +164,7 @@ export default class Home extends Vue {
         categoryId,
         new Date(
           new Date(this.createdAt).toLocaleString("en-EN", {
-            timeZone: "UTC"
+            timeZone: "UTC",
           })
         ).getTime()
       )

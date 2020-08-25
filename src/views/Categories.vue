@@ -1,10 +1,14 @@
 <template>
   <div>
-    <nav-bar :back-button="{
-      show: true,
-      to: 'Home'
-    }" />
-    <v-btn v-if="typeSwitcherEnabled" @click.prevent="changeType" outlined>{{ types[type] }}</v-btn>
+    <nav-bar
+      :back-button="{
+        show: true,
+        to: 'Home',
+      }"
+    />
+    <v-btn v-if="typeSwitcherEnabled" @click.prevent="changeType" outlined>{{
+      types[type]
+    }}</v-btn>
     <v-simple-table>
       <template v-slot:default>
         <tbody>
@@ -15,23 +19,25 @@
             </td>
             <td class="text-right">
               <router-link
-                :to="{name: 'CategoriesUpdate', params: { id: category.id }}"
+                :to="{ name: 'CategoriesUpdate', params: { id: category.id } }"
                 tag="i"
                 class="material-icons"
-              >create</router-link>
+                >create</router-link
+              >
               <i
-                v-if="! sortedById.find(e => e.categoryId === category.id)"
+                v-if="!sortedById.find((e) => e.categoryId === category.id)"
                 @click.prevent="deleteHandler(category.id)"
                 class="material-icons"
-              >delete</i>
+                >delete</i
+              >
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-    <v-btn outlined :to="{name: 'CategoriesCreate'}">
+    <v-btn outlined :to="{ name: 'CategoriesCreate' }">
       <i class="material-icons">add</i>
-      {{ $t('categories.create') }}
+      {{ $t("categories.create") }}
     </v-btn>
   </div>
 </template>
@@ -41,20 +47,23 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Category from "../models/Category";
 import NavBar from "@/components/navbar/NavBar.vue";
+import { VSimpleTable, VBtn } from "vuetify/lib";
 
 const categories = namespace("Categories");
 const expenses = namespace("Expenses");
 
 @Component({
   components: {
-    NavBar
-  }
+    NavBar,
+    VBtn,
+    VSimpleTable,
+  },
 })
 export default class Categories extends Vue {
   private type = 1;
   private types = {
     1: "Income",
-    2: "Outcome"
+    2: "Outcome",
   };
 
   mounted() {

@@ -27,11 +27,12 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import Profile from "@/models/Profile";
 import BudgetProgressElement from "./BudgetProgressElement.vue";
+import { VCard } from "vuetify/lib";
 
 const profile = namespace("Profile");
 
 @Component({
-  components: { BudgetProgressElement }
+  components: { BudgetProgressElement, VCard },
 })
 export default class Budget extends Vue {
   private profile: Profile = new Profile("", 0, 0, 0, "ru");

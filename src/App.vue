@@ -9,12 +9,14 @@
 </template>
 
 <script lang="ts">
+import { VApp } from "vuetify/lib";
 import { Component, Vue } from "vue-property-decorator";
 import PublicLayout from "./layouts/PublicLayout.vue";
 
 @Component({
   components: {
     PublicLayout,
+    VApp,
   },
 })
 export default class App extends Vue {}
