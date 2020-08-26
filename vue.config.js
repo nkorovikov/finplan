@@ -18,5 +18,10 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: true
     }
+  },
+  configureWebpack: {
+    externals: {
+      moment: 'moment'
+    },
   }
 }
