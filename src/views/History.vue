@@ -10,6 +10,7 @@
       <template v-slot:default>
         <thead>
           <tr>
+            <th class="text-left">ID</th>
             <th class="text-left">{{ $t("history.date") }}</th>
             <th class="text-left">{{ $t("history.category") }}</th>
             <th class="text-right text-no-wrap">{{ $t("history.sum") }}</th>
@@ -17,7 +18,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(expence, index) in sortedByCreatedAt" :key="index">
+          <tr v-for="(expence, index) in descSortedByCreatedAt" :key="index">
+            <td>{{expence.id}}</td>
             <td class="text-left">
               {{
                 new Date(expence.createdAt).toLocaleString(
@@ -76,7 +78,7 @@ export default class History extends Vue {
   };
 
   @expenses.Getter
-  public sortedByCreatedAt!: Array<Expense>;
+  public descSortedByCreatedAt!: Array<Expense>;
 
   @categories.Getter
   public sortedById!: Array<Category>;

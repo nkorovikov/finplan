@@ -55,7 +55,7 @@ export default class Report extends Vue {
   private reportService = new ReportService();
 
   @expenses.Getter
-  public sortedByCreatedAt!: Array<Expense>;
+  public descSortedByCreatedAt!: Array<Expense>;
 
   @categories.Getter
   public sortedById!: Array<Category>;
@@ -66,14 +66,14 @@ export default class Report extends Vue {
   get lastWeek(): Array<number> {
     return this.reportService.calculateLastWeek(
       this.sortedById,
-      this.sortedByCreatedAt
+      this.descSortedByCreatedAt
     );
   }
 
   get dailyBudget(): number {
     return this.reportService.calculateSumByDayCount(
       this.sortedById,
-      this.sortedByCreatedAt,
+      this.descSortedByCreatedAt,
       1
     );
   }
@@ -81,14 +81,14 @@ export default class Report extends Vue {
   get weeklyBudget(): number {
     return this.reportService.calculateSumByCurrentWeek(
       this.sortedById,
-      this.sortedByCreatedAt
+      this.descSortedByCreatedAt
     );
   }
 
   get monthlyBudget(): number {
     return this.reportService.calculateSumByCurrentMonth(
       this.sortedById,
-      this.sortedByCreatedAt
+      this.descSortedByCreatedAt
     );
   }
 }

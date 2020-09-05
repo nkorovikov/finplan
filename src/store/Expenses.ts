@@ -8,32 +8,16 @@ const storage: LocalStorage = new LocalStorage();
 export default class Expenses extends VuexModule {
   public expenses: Array<Expense> = storage.getExpenses();
 
-  get sortedByCreatedAt(): Array<Expense> {
-    return [...this.expenses].sort((a: Expense, b: Expense): number => {
-      if (a.getCreatedAt() === b.getCreatedAt()) {
-        return 0;
-      }
-
-      if (a.getCreatedAt() > b.getCreatedAt()) {
-        return -1;
-      }
-
-      return 1;
-    });
+  get descSortedByCreatedAt(): Array<Expense> {
+    return [...this.expenses].sort(
+      (a: Expense, b: Expense): number => b.getCreatedAt() - a.getCreatedAt()
+    );
   }
 
   get sortedById(): Array<Expense> {
-    return [...this.expenses].sort((a: Expense, b: Expense): number => {
-      if (a.getId() === b.getId()) {
-        return 0;
-      }
-
-      if (a.getId() > b.getId()) {
-        return -1;
-      }
-
-      return 1;
-    });
+    return [...this.expenses].sort(
+      (a: Expense, b: Expense): number => a.getId() - b.getId()
+    );
   }
 
   @Mutation
