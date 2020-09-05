@@ -74,6 +74,7 @@ import { namespace } from "vuex-class";
 import Expense from "../models/Expense";
 import Category from "../models/Category";
 import NavBar from "@/components/navbar/NavBar.vue";
+import DateInitializer from "@/library/date/DateInitializer";
 import {
   VTextField,
   VMenu,
@@ -106,12 +107,7 @@ const categories = namespace("Categories");
 export default class Home extends Vue {
   private sum = "";
   private icon = "mdi-minus";
-  private createdAt =
-    new Date().getFullYear() +
-    (new Date().getMonth() + 1 > 10 ? "-" : "-0") +
-    (new Date().getMonth() + 1) +
-    "-" +
-    new Date().getDate();
+  private createdAt = new DateInitializer().initDate();
   private menu = false;
   private snackbar = false;
 
@@ -162,11 +158,7 @@ export default class Home extends Vue {
         lastId + 1,
         numSum,
         categoryId,
-        new Date(
-          new Date(this.createdAt).toLocaleString("en-EN", {
-            timeZone: "UTC",
-          })
-        ).getTime()
+        new DateInitializer().prepareForSave(this.createdAt)
       )
     );
 

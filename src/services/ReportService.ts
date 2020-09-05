@@ -1,6 +1,6 @@
 import Category from "@/models/Category";
 import Expense from "@/models/Expense";
-import DateWrapper from "@/library/DateWrapper";
+import DateWrapper from "@/library/date/DateWrapper";
 import IChartData from "@/library/interfaces/IChartData";
 
 export default class ReportService {
