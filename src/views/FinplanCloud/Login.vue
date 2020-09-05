@@ -77,12 +77,13 @@ export default class Login extends Vue {
       return;
     }
     try {
+      const formData = new URLSearchParams();
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+
       const response = await this.$axios.post(
         "https://finplan-env-production.herokuapp.com/api/login",
-        {
-          email: this.email,
-          password: this.password,
-        }
+        formData
       );
       const token = response.data.token;
 
