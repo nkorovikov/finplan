@@ -2,6 +2,7 @@
   <div>
     <nav-bar />
     <v-text-field
+      data-test="sumText"
       hide-details
       type="tel"
       :append-icon="icon"
@@ -19,6 +20,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
+          data-test="date"
           color="#00E5FF"
           v-model="createdAt"
           prepend-icon="event"
@@ -47,6 +49,7 @@
           v-for="category in categories.slice((i - 1) * 2, (i - 1) * 2 + 2)"
           :key="category.id"
           @click.prevent="saveExpenseHandler(category.id)"
+          data-test="categoryButton"
         >
           <v-card class="pa-4" tile outlined>
             <div>

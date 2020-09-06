@@ -1,20 +1,20 @@
-import { shallowMount, createLocalVue } from "@vue/test-utils";
+import { mount, createLocalVue } from "@vue/test-utils";
 import Home from "@/views/Home.vue";
 import Vuex from "vuex";
+import Vuetify from "vuetify";
+import Category from "@/models/Category";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
-
-const getters = {
-  incomes: () => [],
-  outcomes: () => [],
-};
 
 const store = new Vuex.Store({
   modules: {
     Categories: {
       namespaced: true,
-      getters,
+      getters: {
+        incomes: () => [],
+        outcomes: () => [new Category(1, "test", 1, "test")],
+      },
     },
     Expenses: {
       namespaced: true,
@@ -26,18 +26,53 @@ const store = new Vuex.Store({
 });
 
 describe("Home", () => {
-  it("is vue", () => {
-    const wrapper = shallowMount(Home, {
+  let vuetify: any;
+  let wrapper: any;
+
+  beforeEach(() => {
+    vuetify = new Vuetify();
+
+    wrapper = mount(Home, {
       store,
       localVue,
+      vuetify,
       stubs: {
         routerLink: true,
+        NavBar: '<div class="navbar"></div>',
+        VSnackbar: '<div class="snack"></div>',
       },
       mocks: {
         $t: () => {},
       },
     });
+  });
 
-    expect(wrapper.isVueInstance()).toBeTruthy();
+  it("renders a vue instance", () => {
+    expect(wrapper.isVueInstance()).toBe(true);
+  });
+
+  it("correctly set sum", () => {
+    expect(wrapper.vm.$data.sum).toBe("");
+
+    const sumInput = wrapper.find('[data-test="sumText"]');
+    sumInput.setValue("100");
+
+    expect(wrapper.vm.$data.sum).toBe("100");
+  });
+
+  it("correctly set date", () => {
+    const dateInput = wrapper.find('[data-test="date"]');
+    dateInput.setValue("2020-09-06");
+
+    expect(wrapper.vm.$data.createdAt).toBe("2020-09-06");
+  });
+
+  it("category click", () => {
+    const saveExpenseHandlerStub = jest.fn();
+    wrapper.setMethods({ saveExpenseHandler: saveExpenseHandlerStub });
+    const categoryButton = wrapper.find('[data-test="categoryButton"]');
+    categoryButton.trigger("click");
+
+    expect(saveExpenseHandlerStub).toHaveBeenCalled();
   });
 });
