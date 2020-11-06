@@ -4,6 +4,9 @@
         "home": "Home",
         "report": "Report"
     },
+    "common": {
+        "save": "Save"
+    },
     "home": {
         "categories": "Categories",
         "no-categories": "There are no categories",

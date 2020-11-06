@@ -4,6 +4,9 @@
         "home": "Главная",
         "report": "Отчет"
     },
+    "common": {
+        "save": "Сохранить"
+    },
     "home": {
         "categories": "Категории",
         "no-categories": "Категории отсутствуют",
