@@ -16,6 +16,8 @@ declare module "vue/types/vue" {
   }
 }
 
+export const eventBus = new Vue();
+
 new Vue({
   i18n,
   router,

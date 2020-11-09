@@ -36,7 +36,8 @@
     },
     "about": {
         "control-finances": "Control your finances",
-        "add-to-homescreen-hint": "You can add finplan to your home screen and enjoy all the benefits of a native app (even without internet)"
+        "add-to-homescreen-hint": "You can add finplan to your home screen and enjoy all the benefits of a native app (even without internet)",
+        "inst-subscribe": "Don't forget to subscribe!"
     },
     "profile": {
         "name": "Name",
