@@ -27,6 +27,8 @@ jobs:
       - run: npm ci
       - run: npm run test:unit
       - run: npm run build
+        env:
+          VUE_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
