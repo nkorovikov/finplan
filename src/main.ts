@@ -10,6 +10,7 @@ import * as Sentry from "@sentry/browser";
 import { Vue as VueIntegration } from "@sentry/integrations";
 import { Integrations } from "@sentry/tracing";
 import firebase from "firebase/app";
+import "firebase/analytics";
 
 Vue.config.productionTip = false;
 
