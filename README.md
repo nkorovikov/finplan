@@ -1,5 +1,7 @@
 # Finplan
-![deploy](https://github.com/nkorovikov/finplan/workflows/deploy/badge.svg)
+![stage.deploy](https://github.com/nkorovikov/finplan/workflows/stage.deploy/badge.svg)
+
+![prod.deploy](https://github.com/nkorovikov/finplan/workflows/prod.deploy/badge.svg)
 
 https://nkorovikov.github.io/finplan/
 
