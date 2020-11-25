@@ -1,4 +1,5 @@
 export default interface BackButton {
     show: boolean,
-    to: string
+    to: string,
+    params: {}
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  "publicPath": process.env.VUE_APP_STAGE ? "" : "/finplan/",
+  "publicPath": "/finplan/",
   "pwa": {
     "appleMobileWebAppCapable": "yes",
     "appleMobileWebAppStatusBarStyle": "black",

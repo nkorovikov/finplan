@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <tr v-for="(expence, index) in descSortedByCreatedAt" :key="index">
-            <td>{{expence.id}}</td>
+            <td>{{ expence.id }}</td>
             <td class="text-left">
               {{
                 new Date(expence.createdAt).toLocaleString(
@@ -29,11 +29,15 @@
               }}
             </td>
             <td class="text-left">
-              {{ sortedById.find((c) => expence.categoryId === c.id).name }}
+              {{
+                sortedCategoriesById.find((c) => expence.categoryId === c.id)
+                  .name
+              }}
             </td>
             <td class="text-right text-no-wrap">
               {{
-                sortedById.find((c) => expence.categoryId === c.id).type === 1
+                sortedCategoriesById.find((c) => expence.categoryId === c.id)
+                  .type === 1
                   ? "+"
                   : "-"
               }}
@@ -81,7 +85,7 @@ export default class History extends Vue {
   public descSortedByCreatedAt!: Array<Expense>;
 
   @categories.Getter
-  public sortedById!: Array<Category>;
+  public sortedCategoriesById!: Array<Category>;
 
   @expenses.Action
   deleteExpense!: (id: number) => void;

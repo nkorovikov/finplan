@@ -8,7 +8,7 @@ const storage: LocalStorage = new LocalStorage();
 export default class CategoriesCategories extends VuexModule {
   public categories: Array<Category> = storage.getCategories();
 
-  get sortedById(): Array<Category> {
+  get sortedCategoriesById(): Array<Category> {
     return [...this.categories].sort(
       (a: Category, b: Category): number => a.getId() - b.getId()
     );

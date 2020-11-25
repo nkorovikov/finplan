@@ -4,13 +4,14 @@ import BaseProvider from "./BaseProvider.vue";
 import { namespace } from "vuex-class";
 import Category from "../models/Category";
 import ICategory from "@/models/ICategory";
+import ICategoryFilter from "@/domain/category/filters/ICategoryFilter";
 
 const categories = namespace("Categories");
 
 @Component({})
 export default class CategoryProvider extends BaseProvider {
   @categories.Getter
-  public sortedById!: Array<Category>;
+  public sortedCategoriesById!: Array<Category>;
 
   @categories.Action
   createCategory!: (category: Category) => void;
@@ -36,8 +37,8 @@ export default class CategoryProvider extends BaseProvider {
   @Provide("post")
   private post(category: ICategory) {
     // @TODO validation
-    const lastId: number = this.sortedById.length
-      ? this.sortedById[this.sortedById.length - 1].getId()
+    const lastId: number = this.sortedCategoriesById.length
+      ? this.sortedCategoriesById[this.sortedCategoriesById.length - 1].getId()
       : 0;
 
     this.createCategory(
@@ -50,6 +51,28 @@ export default class CategoryProvider extends BaseProvider {
   private put(id: number, category: Category) {
     this.updateCategory(category.getId(), category);
     this.$router.push({ name: "Categories" });
+  }
+
+  @Provide("fetch")
+  private fetch(filters: ICategoryFilter) {
+    let categories: Array<Category> = this.sortedCategoriesById;
+
+    if (filters.type) {
+      categories = categories.filter(
+        (category: Category) => category.getType() === filters.type
+      );
+    }
+
+    if (filters.name) {
+      categories = categories.filter((category: Category) =>
+        category
+          .getName()
+          .toUpperCase()
+          .includes(filters.name.toUpperCase())
+      );
+    }
+
+    return Promise.resolve(categories);
   }
 }
 </script>
