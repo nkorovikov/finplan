@@ -1,6 +1,6 @@
 <template>
   <v-app-bar dark dense flat app>
-    <v-btn exact icon v-if="backButton.show" :to="{ name: backButton.to }">
+    <v-btn exact icon v-if="backButton.show" :to="{ name: backButton.to, params: backButton.params }">
       <v-icon>mdi-arrow-left</v-icon>
     </v-btn>
 
@@ -31,6 +31,7 @@ export default class NavBar extends Vue {
       return {
         show: false,
         to: "",
+        params: {},
       };
     },
   })

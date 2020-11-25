@@ -100,11 +100,11 @@ export default class ByCategories extends Vue {
   public descSortedByCreatedAt!: Array<Expense>;
 
   @categories.Getter
-  public sortedById!: Array<Category>;
+  public sortedCategoriesById!: Array<Category>;
 
   get barData(): IChartData {
     return this.reportService.getByCategoriesChartData(
-      this.sortedById,
+      this.sortedCategoriesById,
       this.descSortedByCreatedAt,
       this.byCategoriesDateFilter
     );

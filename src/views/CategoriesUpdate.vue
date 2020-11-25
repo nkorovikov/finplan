@@ -3,7 +3,8 @@
     <nav-bar
       :back-button="{
         show: true,
-        to: 'Categories',
+        to: 'CategoriesShow',
+        params: { id: $route.params.id },
       }"
     />
     <category-form :id="this.$route.params.id" />
