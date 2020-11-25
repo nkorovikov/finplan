@@ -37,6 +37,7 @@ jobs:
           VUE_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VUE_APP_FIREBASE_MESSAGING_SENDER_ID }}
           VUE_APP_FIREBASE_APP_ID: ${{ secrets.VUE_APP_FIREBASE_APP_ID }}
           VUE_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.VUE_APP_FIREBASE_MEASUREMENT_ID }}
+          VUE_APP_MANIFEST_NAME: 'site.webmanifest'
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3

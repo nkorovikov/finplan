@@ -38,6 +38,7 @@ jobs:
           VUE_APP_FIREBASE_APP_ID: ${{ secrets.VUE_APP_FIREBASE_APP_ID }}
           VUE_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.VUE_APP_FIREBASE_MEASUREMENT_ID }}
           VUE_APP_STAGE: True
+          VUE_APP_MANIFEST_NAME: 'stage.webmanifest'
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
