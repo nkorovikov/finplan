@@ -12,8 +12,8 @@ const store = new Vuex.Store({
     Categories: {
       namespaced: true,
       getters: {
-        incomes: () => [],
-        outcomes: () => [new Category(1, "test", 1, "test")],
+        finalIncomes: () => [],
+        finalOutcomes: () => [new Category(1, "test", 1, "test")],
       },
     },
     Expenses: {
@@ -42,6 +42,7 @@ describe("Home", () => {
         VSnackbar: '<div class="snack"></div>',
       },
       mocks: {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         $t: () => {},
       },
     });

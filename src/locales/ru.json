@@ -5,7 +5,9 @@
         "report": "Отчет"
     },
     "common": {
-        "save": "Сохранить"
+        "save": "Сохранить",
+        "update": "Изменить",
+        "delete": "Удалить"
     },
     "home": {
         "categories": "Категории",
@@ -20,7 +22,9 @@
         "icon": "Иконка",
         "save": "Сохранить",
         "income": "Доход",
-        "outcome": "Расход"
+        "outcome": "Расход",
+        "parent": "Входит в категорию",
+        "create-subcategory": "Создать подкатегорию"
     },
     "history": {
         "date": "Дата",

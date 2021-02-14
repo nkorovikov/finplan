@@ -144,52 +144,26 @@ export default class ReportService {
       .reduce((sum, s) => sum + s, 0);
   }
 
-  getByCategoriesChartData(
+  getByRootCategoriesChartData(
     categories: Array<Category>,
     expenses: Array<Expense>,
     dateRange: Array<string>
   ): IChartData {
     const labels: Array<string> = [];
     const data: Array<number> = [];
-    categories.forEach((c: Category) => {
-      const expensesFiltered = expenses.filter((expense: Expense) => {
-        if (expense.getCategoryId() !== c.getId()) {
-          return false;
-        }
 
-        if (dateRange.length === 0 || dateRange.length === 1) {
-          return true;
-        }
+    const rootCategories = categories.filter((c: Category) => c.getCategoryId() === undefined)
 
-        const from = new Date(
-          new Date(dateRange[0]).toLocaleString("en-EN", {
-            timeZone: "UTC",
-          })
-        ).getTime();
+    rootCategories.forEach((c: Category) => {
 
-        const to = new Date(
-          new Date(dateRange[1]).toLocaleString("en-EN", {
-            timeZone: "UTC",
-          })
-        ).getTime();
+      const childrenSum = this.getChildrenSum(c, categories, expenses, dateRange)
 
-        if (expense.getCreatedAt() >= from && expense.getCreatedAt() <= to) {
-          return true;
-        }
-
-        return false;
-      });
-      let sum = 0;
-      expensesFiltered.forEach((e: Expense) => {
-        sum += e.getSum();
-      });
-
-      if (sum === 0) {
+      if (childrenSum === 0) {
         return;
       }
 
       labels.push(c.getName());
-      data.push(sum);
+      data.push(childrenSum);
     });
 
     return {
@@ -211,5 +185,64 @@ export default class ReportService {
         },
       ],
     };
+  }
+
+  private getChildrenSum(category: Category,
+                       categories: Array<Category>,
+                       expenses: Array<Expense>,
+                       dateRange: Array<string>): number
+  {
+    const children = categories.filter((c: Category) => c.getCategoryId() === category.getId())
+
+    if (children.length === 0) {
+      return this.getExpensesSum(category, expenses, dateRange)
+    }
+
+    let sum = 0
+
+    children.forEach((c: Category) => {
+      sum = sum + this.getChildrenSum(c, categories, expenses, dateRange)
+    })
+
+    return sum;
+  }
+
+  private getExpensesSum(category: Category,
+                         expenses: Array<Expense>,
+                         dateRange: Array<string>)
+  {
+    const expensesFiltered = expenses.filter((expense: Expense) => {
+      if (expense.getCategoryId() !== category.getId()) {
+        return false;
+      }
+
+      if (dateRange.length === 0 || dateRange.length === 1) {
+        return true;
+      }
+
+      const from = new Date(
+          new Date(dateRange[0]).toLocaleString("en-EN", {
+            timeZone: "UTC",
+          })
+      ).getTime();
+
+      const to = new Date(
+          new Date(dateRange[1]).toLocaleString("en-EN", {
+            timeZone: "UTC",
+          })
+      ).getTime();
+
+      if (expense.getCreatedAt() >= from && expense.getCreatedAt() <= to) {
+        return true;
+      }
+
+      return false;
+    });
+    let sum = 0;
+    expensesFiltered.forEach((e: Expense) => {
+      sum += e.getSum();
+    });
+
+    return sum
   }
 }

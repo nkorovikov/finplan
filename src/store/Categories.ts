@@ -14,16 +14,38 @@ export default class CategoriesCategories extends VuexModule {
     );
   }
 
+  get rootCategories(): Array<Category> {
+    return [...this.categories].filter(
+        (a: Category): boolean => a.getCategoryId() === undefined
+    );
+  }
+
   get incomes(): Array<Category> {
     return [...this.categories].filter(
       (a: Category): boolean => a.getType() === 1
     );
   }
 
+  get finalIncomes(): Array<Category> {
+    const incomes = [...this.categories].filter(
+      (a: Category): boolean => a.getType() === 1
+    );
+
+    return incomes.filter((a: Category): boolean => incomes.filter((b: Category): boolean => b.getCategoryId() === a.getId()).length === 0)
+  }
+
   get outcomes(): Array<Category> {
     return [...this.categories].filter(
       (a: Category): boolean => a.getType() === 2
     );
+  }
+
+  get finalOutcomes(): Array<Category> {
+    const outcomes = [...this.categories].filter(
+      (a: Category): boolean => a.getType() === 2
+    );
+
+    return outcomes.filter((a: Category): boolean => outcomes.filter((b: Category): boolean => b.getCategoryId() === a.getId()).length === 0)
   }
 
   @Mutation

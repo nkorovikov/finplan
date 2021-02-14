@@ -5,7 +5,9 @@
         "report": "Report"
     },
     "common": {
-        "save": "Save"
+        "save": "Save",
+        "update": "Update",
+        "delete": "Delete"
     },
     "home": {
         "categories": "Categories",
@@ -20,7 +22,9 @@
         "icon": "Icon",
         "save": "Save",
         "income": "Income",
-        "outcome": "Outcome"
+        "outcome": "Outcome",
+        "parent": "Parent category",
+        "create-subcategory": "Create subcategory"
     },
     "history": {
         "date": "Date",

@@ -42,9 +42,18 @@ export default class CategoryProvider extends BaseProvider {
       : 0;
 
     this.createCategory(
-      new Category(lastId + 1, category.name, category.type, category.icon)
+      new Category(
+        lastId + 1,
+        category.name,
+        category.type,
+        category.icon,
+        Number(this.$route.params.id)
+      )
     );
-    this.$router.push({ name: "Categories" });
+    this.$router.push({
+      name: "CategoriesShow",
+      params: { id: Number(this.$route.params.id) } as any,
+    });
   }
 
   @Provide("put")
@@ -58,23 +67,9 @@ export default class CategoryProvider extends BaseProvider {
     let categories: Array<Category> = this.sortedCategoriesById;
 
     categories = categories.filter(
-      (category: Category) => !category.getCategoryId()
+      (category: Category) =>
+        category.getCategoryId() === Number(this.$route.params.id)
     );
-
-    if (filters.type) {
-      categories = categories.filter(
-        (category: Category) => category.getType() === filters.type
-      );
-    }
-
-    if (filters.name) {
-      categories = categories.filter((category: Category) =>
-        category
-          .getName()
-          .toUpperCase()
-          .includes(filters.name.toUpperCase())
-      );
-    }
 
     return Promise.resolve(categories);
   }

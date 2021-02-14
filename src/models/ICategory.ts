@@ -3,4 +3,5 @@ export default interface ICategory {
   name: string;
   type: number;
   icon: string;
+  categoryId?: number;
 }
