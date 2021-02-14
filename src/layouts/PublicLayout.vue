@@ -15,6 +15,11 @@
         <span>{{ $t("menu.home") }}</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
+
+      <v-btn exact :to="{ name: 'Categories' }" height="56px">
+        <span>{{ $t("home.categories") }}</span>
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-bottom-navigation>
   </main>
 </template>

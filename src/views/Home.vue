@@ -62,9 +62,6 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-btn outlined block :to="{ name: 'Categories' }">{{
-      $t("home.categories")
-    }}</v-btn>
     <v-snackbar v-model="snackbar" :timeout="1000"
       >{{ $t("home.added") }}!</v-snackbar
     >
@@ -118,19 +115,19 @@ export default class Home extends Vue {
   public sortedById!: Array<Expense>;
 
   @categories.Getter
-  public incomes!: Array<Category>;
+  public finalOutcomes!: Array<Category>;
 
-  @categories.Getter
-  public outcomes!: Array<Category>;
+    @categories.Getter
+    public finalIncomes!: Array<Category>;
 
   @expenses.Action
   saveExpense!: (expense: Expense) => void;
 
   get categories(): Array<Category> {
     if (this.icon === "mdi-plus") {
-      return this.incomes;
+      return this.finalIncomes;
     }
-    return this.outcomes;
+    return this.finalOutcomes;
   }
 
   get thereAreNoCategories(): boolean {
@@ -174,7 +171,7 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 @media (max-width: 425px) {
   .overflower-categories {
-    height: 350px;
+    height: 550px;
     overflow-y: scroll;
   }
 }

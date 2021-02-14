@@ -42,6 +42,12 @@ const routes: Array<RouteConfig> = [
     props: true,
   },
   {
+    path: "/categories/:id/sub-category-create",
+    name: "SubCategoryCreate",
+    component: () => import("../views/SubCategoryCreate.vue"),
+    props: true,
+  },
+  {
     path: "/settings",
     name: "Settings",
     component: () => import("../views/Settings.vue"),

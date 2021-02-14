@@ -2,6 +2,7 @@ import CategoryListingItem from "@/components/list/CategoryListingItem.vue";
 import Type from "@/domain/category/filters/Type.vue";
 import Name from "@/domain/category/filters/Name.vue";
 import CategoryProvider from "@/providers/CategoryProvider.vue";
+import SubCategoryProvider from "@/providers/SubCategoryProvider.vue";
 import ListingBuilder from "./ListingBuilder";
 
 export default class ListingDirector {
@@ -35,6 +36,14 @@ export default class ListingDirector {
           },
         },
       ])
+      .view("table")
+      .build();
+  }
+
+  makeSubCategoryListing() {
+    return this.builder
+      .withProvider(SubCategoryProvider)
+      .withListingItem(CategoryListingItem)
       .view("table")
       .build();
   }

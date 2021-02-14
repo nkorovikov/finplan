@@ -21,7 +21,7 @@ import EntityListingLayout from "./EntityListingLayout.vue";
 import EntityListingTable from "./EntityListingTable.vue";
 import NavFilter from "./NavFilter.vue";
 
-import { Component, Vue, Prop, Inject } from "vue-property-decorator";
+import { Component, Vue, Prop, Inject, Watch } from "vue-property-decorator";
 import IFilter from "../../domain/abstract/filters/IFilter";
 import IFilterSet from "../../domain/abstract/filters/IFilterSet";
 import Model from "@/domain/abstract/models/Model";
@@ -43,6 +43,18 @@ export default class EntityListing extends Vue {
 
   private async filterHandler(payload: IFilter) {
     this.entities = await this.fetch(payload);
+  }
+
+  @Watch("$route")
+  async route(to: any, from: any) {
+    const filters = this.filters || [];
+    const defaultPayload: IFilter = Object.fromEntries(
+      filters.map((filter: IFilterSet) => [
+        filter.props.name,
+        filter.props.default,
+      ])
+    );
+    this.entities = await this.fetch(defaultPayload);
   }
 
   public async created() {

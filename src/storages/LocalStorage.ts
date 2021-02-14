@@ -31,7 +31,13 @@ export default class LocalStorage {
     }
     return JSON.parse(localStorage.categories).map(
       (category: ICategory) =>
-        new Category(category.id, category.name, category.type, category.icon)
+        new Category(
+          category.id,
+          category.name,
+          category.type,
+          category.icon,
+          category.categoryId
+        )
     );
   }
 
